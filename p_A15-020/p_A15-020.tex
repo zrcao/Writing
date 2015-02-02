@@ -1,5 +1,5 @@
 \documentclass[letterpaper,11pt,onecolumn]{article}
-\usepackage{layout}
+%\usepackage{layout}
 \usepackage{graphicx}
 \usepackage{fancyhdr}
 \usepackage{array}
@@ -10,11 +10,11 @@
 %\usepackage{mathptmx}
 
 
-\hoffset=-72.27pt
-\voffset=-72.27pt
-\textwidth=506.30pt
-\textheight=650pt
-\marginparwidth=0pt
+\hoffset=-0.74in
+\voffset= -0.8in
+\textwidth=6.5in
+\textheight=8.5in
+%\marginparwidth=0pt
 
 %\fancyhead{}
 %\fancyfoot{}
@@ -24,21 +24,22 @@
 \rhead{}
 %\cfoot{Mailing Address: \\Tel: 1(703)}
 
-
 \pagestyle{fancy}
+
+%\title{\bf{Self-Organizing Interference Alignment (SOIA)\\for Tactical Mobile Edge Networks}}
+
 
 \begin{document}
 
-%TT\layout{}
-
 \thispagestyle{fancy}
+
+%\maketitle
 
 \begin{center}
 ~\\
 ~\\
 ~\\
-{\Large{\bf{Large-Scale Android Network Experiment Harness\\
-~~~~~~ --- Use Cases and Requirements}}}\\
+{\Large{\huge\bf{Self-Organizing Interference Alignment (SOIA) for Tactical Mobile Ad Hoc Communications Network}}}\\
 ~\\
 \vspace{0.1in}
 Zhongren Cao\\
@@ -47,19 +48,34 @@ zcao@c3commsystems.com
 
 \vspace{0.1in}
 
+\newpage
+
 \section{IDENTIFICATION \& SIGNIFICANCE OF THE OPPORTUNITY}
 
-% Talk about the importance of tactical edge networks
+\subsection{Problem Identification}
+Epitomized by recent military operations, modern warfare is conducted by small units at tactical edges. The 2012 new strategic guidance for Department of Defense articulates that one of the primary missions of the U.S. Armed forces is to project power despite anti-access/area denial (A2AD) challenges~\cite{DoD:strategy2012}, including implementing the Joint Operational Access Concept~\cite{DoD:JOAC}, which suggests ``smaller units and platforms that are rapidly deployable yet lethal." For warfighters in small units at tactical edges, efficiently sharing real-time situational awareness information is critical to their mission success. To this end, the tactical Mobile Ad hoc Communications Network (TMACN) is important because it will provide the backbone for exchange and sharing of information from sensors, manned and unmanned vehicles and systems, and dismounted soldiers. Therefore, improving the network capacity for TMACN has a direct impact on mission successes. 
 
-Improving the networking capacity of tactical edge mobile networks has a direct impact on mission successes. Wireless networks are interference limited due to the fact that multiple users need to share the transmission resources. Traditionally, wireless networks share resources among multiple users by dividing frequency and/or time into orthogonal units, such as in TDMA, FDMA and OFDMA. Each resource unit is only used by a single transmission every time in order to avoid interference among multiple transmissions. In addition, frequency reuse is widely adopted in commercial cellular systems and military systems to increase the network system capacity. In frequency reuse, the same frequency/time resource unit is shared by multiple transceiver pairs that are far apart geographically such that mutual interference is not significant due to path loss. Vector-based signaling are used in code division multiple access (CDMA) using orthogonal codes and spatial division multiple access (SDMA) with multiple antenna arrays. Vector space provides an additional dimension of transmission resource. Therefore, the same time/frequency resource unit could be shared among multiple users as long as they are orthogonal to each other in the vector space. 
+%Some of the unique features that distinguish TMACNs from traditional wireless networks are their mobility; they must be self contained and have the ability to move to support forces as engagements change, their adaptability; they must be able to reconfigure themselves in real-time as new nodes are added and others are lost, and their size; they may be on the order of hundreds or even thousands of nodes. The uniqueness associated with TMACNs gives rise to several complexities that limits a satisfactory solution for performance prediction; theories required to predict their performance have yet to be developed, and adequate hardware to test them is still years away. The focus of this effort is to develop a performance prediction solution for TMACNs based on simulation.
 
-All aforementioned approaches are built upon a basic principle that, in order to avoid interference, closely located nodes in a wireless network can only use orthogonal resource units for simultaneous transmissions. The capacity of a wireless network is thus limited by the number of available orthogonal resource units. 
+Wireless networks are interference limited due to the fact that multiple users need to share the transmission resources. Traditionally, time and frequency resources in wireless networks are divided into orthogonal units and assigned to different users, such as TDMA, FDMA and OFDMA. Each resource unit can only be used by a single transmission in order to avoid interference among multiple simultaneous transmissions. For large networks, resource reuse is widely adopted in both commercial and military systems to increase the network capacity. The same frequency/time resource unit is shared by multiple transceiver pairs that are far apart geographically such that mutual interference is not significant due to path loss. 
 
-Interference alignment is an emerging approach, which breaks away from the above fundamental principle. In interference alignment, the signaling of multiple closely located transceiver pairs are jointly designed, such that at each individual receiver all interference aligned into a subspace that is orthogonal to the desired signal. The number of interferences is more than the rank of the aligned subspace. This is explained graphically in Fig.*. ... Using interference alignment, from the network point of view, the number of simultaneous transmissions within the interference range can be more than the number of available orthogonal resource units. Thus, the overall network throughput is increased.
+In addition to the frequency and the time signaling dimensions, multiple antenna arrays and MIMO systems enable the vector space as a third signaling dimension, i.e. the spatial dimension. The spatial dimension can be shared among multiple transmissions or multiple data streams of the same transceiver pair. The same time and frequency resource unit can be shared among multiple transmissions as long as they can be separated in the spatial dimension. In the ideal case, each transmission occupies a subspace that is orthogonal to the subspaces of all other parallel transmissions. In reality, due to correlations among antennas, the channel matrix may be rank-deficient thus limits the number of simultaneous transmissions that can be supported. To some extend, spread spectrum technology can also be viewed as using vector-based signaling to support multiuser communications. 
+
+All aforementioned approaches are built upon the basic doctrine that, in order to avoid interference, closely located transceiver pairs in a wireless network must use orthogonal transmission resource units for simultaneous transmissions. Each resource unit can only be used by a single transmission. Therefore, the number of simultaneous transmissions are upper bounded by the number of orthogonal resource units available to use. Given the limited bandwidth each radio can access and the limited number of antennas each radio is equipped per size, weight and power (SWaP) requirements, the capacity of tactical mobile networks is thus constrained during operational deployment. 
+
+In order to further enhance the capacity of tactical networks, we need to develop fundamentally new technology that can be deployed in realistic mission operations. 
+
+\subsection{Interference Alignment -- The Opportunity for More Wireless Network Capacity}
+
+Interference alignment (IA) is an emerging approach, which breaks away from the above fundamental doctrine, i.e., the number of simultaneous transmissions among closely located radio transceivers is limited by the number of orthogonal transmission resource units.  
+
+ In interference alignment, the signaling of multiple closely located transceiver pairs are jointly designed, such that at each individual receiver all interference aligned into a subspace that is orthogonal to the desired signal. The number of interferences is more than the rank of the aligned subspace. This is explained graphically in Fig.*. ... Using interference alignment, from the network point of view, the number of simultaneous transmissions within the interference range can be more than the number of available orthogonal resource units. Thus, the overall network throughput is increased.
+
 
 
 at least in theory, shows it can significantly improve the network capacity. The theoretic concept of interference has been extensively explained in many academia publications. The theoretic framework for IA has several idealistic assumptions that need to be addressed before apply IA in practical systems. First, since IA jointly design the transmission signals for multiple transmitters, the channel state information (CSI) is central to calculating IA beamforming vectors. As a result, IA incurs significant overhead for CSI estimations and feedback. In mobile fast-fading environment, the overhead of CSI acquisition can limit or cancel out the gains of IA. 
 
+\subsection{Challenges and Solutions}
 
 However, how to materialize the capacity gain promised by IA in an operational network is still a challenging problem. In particular, tactical mobile ad hoc network (TMACN) poses several challenges to apply IA. 
 
@@ -97,7 +113,7 @@ Second, IA mode selection.
 
 Third, training and feedback based on the mode selected.
 
-Fourth, 
+Fourth, \cite{6472197}
 
 
 \section{PHASE I TECHICAL OBJECTIVES}
@@ -117,5 +133,9 @@ Fourth,
 \section{CONSULTANTS}
 
 \section{PRIOR, CURRENT OR PENDING SUPPORT}
+
+\bibliographystyle{IEEEtran}
+\bibliography{../BibTex/ZCaoBibCollection.bib}
+
 
 \end{document} 
