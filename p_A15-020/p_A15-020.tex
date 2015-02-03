@@ -71,11 +71,9 @@ Interference alignment (IA) is an emerging approach, which breaks away from the 
 
  In interference alignment, the signaling of multiple closely located transceiver pairs are jointly designed, such that at each individual receiver all interference aligned into a subspace that is orthogonal to the desired signal. The number of interferences is more than the rank of the aligned subspace. This is explained graphically in Fig.*. ... Using interference alignment, from the network point of view, the number of simultaneous transmissions within the interference range can be more than the number of available orthogonal resource units. Thus, the overall network throughput is increased.
 
+At least in theory, shows it can significantly improve the network capacity. The theoretic concept of interference has been extensively explained in many academia publications. The theoretic framework for IA has several idealistic assumptions that need to be addressed before apply IA in practical systems. First, since IA jointly design the transmission signals for multiple transmitters, the channel state information (CSI) is central to calculating IA beamforming vectors. As a result, IA incurs significant overhead for CSI estimations and feedback. In mobile fast-fading environment, the overhead of CSI acquisition can limit or cancel out the gains of IA. 
 
-
-at least in theory, shows it can significantly improve the network capacity. The theoretic concept of interference has been extensively explained in many academia publications. The theoretic framework for IA has several idealistic assumptions that need to be addressed before apply IA in practical systems. First, since IA jointly design the transmission signals for multiple transmitters, the channel state information (CSI) is central to calculating IA beamforming vectors. As a result, IA incurs significant overhead for CSI estimations and feedback. In mobile fast-fading environment, the overhead of CSI acquisition can limit or cancel out the gains of IA. 
-
-\subsection{Practical Challenges}
+\subsection{Practical Challenges and Requirements}
 
 Theoretical investigation shows that a $K$-pair interference channel with IA can achieve its total DOF, which is $K/2$ [\#].  In practice, several challenges have to be addressed before materializing the capacity gain promised by IA in an operational TMACN.
 
@@ -85,35 +83,21 @@ Theoretical investigation shows that a $K$-pair interference channel with IA can
 
 {\textbf{\textit{Limiting coordination overhead}}} --- To compute IA solutions, classical IA algorithms requires not only the channel state information (CSI) of all participating transceiver pairs, but also the CSI of all interfering pairs. For a $K$-pair IA scheme, $K^2$ sets of CSI information are required for computing. To control the growth of coordination overhead, smaller clusters are preferable. Since IA engine must recalculate the IA precoder beamforms when the channel changes, coordination overhead also grows in high-mobility fast-fading environment, which is typical in tactical deployment. As a result, TMACN requires IA schemes that can significantly reduce the need for CSI acquisition feedback. Protocol level coordinations, such as determining the beginning and ending of the transmission, selecting time and frequency synchronization reference point, achieving synchronization, also incur overhead. An ideal solution for practical TMACN systems would achieve protocol level coordination with minimum cost.
 
-{\textbf{\textit{existing systems}}} ---fa
 
 
-
-In particular, tactical mobile ad hoc network (TMACN) poses several challenges to apply IA. 
-
-Several challenges have to be addressed in order to reap the benefits of IA in operational tactical mobile ad hoc network. 
-
-
-
-Second, unlikely commercial systems, TMACN usually doesn't have a centralized control plane. Therefore, IA relies on distributed coordination among peer nodes. 
-
-Third,  technology evolution instead of revolution is better for TMACN.
-
-Therefore, a distributed 
-
-First, tactical network is inherently heterogeneous.  size weight and power (SWaP) requirements 
-
+%In particular, tactical mobile ad hoc network (TMACN) poses several challenges to apply IA. 
+%Several challenges have to be addressed in order to reap the benefits of IA in operational tactical mobile ad hoc network. 
+%Second, unlikely commercial systems, TMACN usually doesn't have a centralized control plane. Therefore, IA relies on distributed coordination among peer nodes. 
+%Third,  technology evolution instead of revolution is better for TMACN.
+%Therefore, a distributed 
+%First, tactical network is inherently heterogeneous.  size weight and power (SWaP) requirements 
 % Situational awareness at tactical edge requires  higher data throughput
-
 % Interference alignment overview and its potential application to improve the throughput of tactical edge network
-
 % General challenges of applying interference alignment 
-
 % Challenges posed by the tactical edge networks
 %  1. Hybrid nodes (vehicle node vs. dismounted nodes) from one antenna to multiple antennas
 %  2. Hierarchical network architecture
-
-It requires several steps to incorporate IA into the TMACN operations. The first step is to identify IA opportunities. 
+% It requires several steps to incorporate IA into the TMACN operations. The first step is to identify IA opportunities. 
 
 In this project, we propose to design a software suite, which enables distributed interference alignment cooperations among tactical edge mobile nodes.  Since most existing military waveforms operate in slotted or TDMA mode, THE SYSTEM assumes a operational slotted network without IA as the baseline. In order to be backward compatible with existing tactical protocols,  where initial slot assignment is assumed to be performed by methods used in existing TMACN, such as SRW. Thus, each node possesses a series of time slots. The system level gain from IA comes from enabling other transceiver pairs to share time slots assigned to node ??. 
 
