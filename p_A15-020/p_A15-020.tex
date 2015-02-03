@@ -18,7 +18,7 @@
 
 %\fancyhead{}
 %\fancyfoot{}
-\pagenumbering{Roman}
+%\pagenumbering{Roman}
 \lhead{\includegraphics[width=0.25\textwidth]{../figures/C-3logo.png}}
 \chead{}
 \rhead{}
@@ -53,7 +53,7 @@ zcao@c3commsystems.com
 \section{IDENTIFICATION \& SIGNIFICANCE OF THE OPPORTUNITY}
 
 \subsection{Problem Identification}
-Epitomized by recent military operations, modern warfare is conducted by small units at tactical edges. The 2012 new strategic guidance for Department of Defense articulates that one of the primary missions of the U.S. Armed forces is to project power despite anti-access/area denial (A2AD) challenges~\cite{DoD:strategy2012}, including implementing the Joint Operational Access Concept~\cite{DoD:JOAC}, which suggests ``smaller units and platforms that are rapidly deployable yet lethal." For warfighters in small units at tactical edges, efficiently sharing real-time situational awareness information is critical to their mission success. To this end, the tactical Mobile Ad hoc Communications Network (TMACN) is important because it will provide the backbone for exchange and sharing of information from sensors, manned and unmanned vehicles and systems, and dismounted soldiers. Therefore, improving the network capacity for TMACN has a direct impact on mission successes. 
+Epitomized by recent military operations, modern warfare is conducted by small units at tactical edges. The 2012 new strategic guidance for Department of Defense articulates that one of the primary missions of the U.S. Armed forces is to project power despite anti-access/area denial (A2AD) challenges~\cite{DoD:strategy2012}, including implementing the Joint Operational Access Concept~\cite{DoD:JOAC}, which suggests ``smaller units and platforms that are rapidly deployable yet lethal." For warfighters in small units at tactical edges, efficiently sharing real-time situational awareness information is critical to their mission success. To this end, the tactical Mobile Ad hoc Communications Network (TMACN) is important because it will provide the backbone for exchange and sharing of information from sensors, manned and unmanned vehicles and systems, and dismounted soldiers. Improving the network capacity for TMACN has a direct impact on warfighter's mission success . 
 
 %Some of the unique features that distinguish TMACNs from traditional wireless networks are their mobility; they must be self contained and have the ability to move to support forces as engagements change, their adaptability; they must be able to reconfigure themselves in real-time as new nodes are added and others are lost, and their size; they may be on the order of hundreds or even thousands of nodes. The uniqueness associated with TMACNs gives rise to several complexities that limits a satisfactory solution for performance prediction; theories required to predict their performance have yet to be developed, and adequate hardware to test them is still years away. The focus of this effort is to develop a performance prediction solution for TMACNs based on simulation.
 
@@ -75,13 +75,25 @@ Interference alignment (IA) is an emerging approach, which breaks away from the 
 
 at least in theory, shows it can significantly improve the network capacity. The theoretic concept of interference has been extensively explained in many academia publications. The theoretic framework for IA has several idealistic assumptions that need to be addressed before apply IA in practical systems. First, since IA jointly design the transmission signals for multiple transmitters, the channel state information (CSI) is central to calculating IA beamforming vectors. As a result, IA incurs significant overhead for CSI estimations and feedback. In mobile fast-fading environment, the overhead of CSI acquisition can limit or cancel out the gains of IA. 
 
-\subsection{Challenges and Solutions}
+\subsection{Practical Challenges}
 
-However, how to materialize the capacity gain promised by IA in an operational network is still a challenging problem. In particular, tactical mobile ad hoc network (TMACN) poses several challenges to apply IA. 
+Theoretical investigation shows that a $K$-pair interference channel with IA can achieve its total DOF, which is $K/2$ [\#].  In practice, several challenges have to be addressed before materializing the capacity gain promised by IA in an operational TMACN.
+
+{\textbf{\textit{Clustering transceiver pairs}}} --- IA requires coordination among multiple transceiver pairs to design the signals and setup the joint transmissions in the physical layer. So the first step in applying IA is to cluster transceiver pairs instead of individual nodes, as in the traditional mobile ad hoc network (MANET) clustering problem  [\#]. Even given the same group of radios, if the pairing of transceivers changes, the IA signaling of this group has to be re-designed. Most research papers discussing IA assume that the $K$ pairs are given {\it{a prior}}. This assumption is reasonable for a cellular system, where a centralized control plane manages multiple base stations and also has the full knowledge of all traffic. The knowledge of current traffic needs is necessary to determine the participating transceiver pairs within a cluster. TMACN, on the contrary, doesn't have a centralized control plane. Each radio in TMACN knows only its own traffic needs. There is no entity in a TMACN which has global knowledge of all traffic needs. In short, distributed pairing of radios with active traffic need is the first challenge to be addressed.
+
+{\textbf{\textit{Handling heterogeneous radios}}} ---  Tactical networks are inherently heterogeneous. Dismounted soldier radios and vehicle mounted radio transceivers have different SWaP requirements. Hence, different radios are equipped with various numbers of antennas. For example, the AN/PRC-154 Rifleman Radio that is being fielded now to combat troops is a single transceiver radio. The AN/PRC-155 Manpack radio has two radio channels. More antennas are available on vehicular-mounted radios, for example AN/PRC-117G. Given the dynamic nature of battlefield communications, the IA solution computing must take into account the fact that, within an IA cluster, some radios have reduced signal dimensionality than the others. This indicates that each radio must share its antenna configuration with neighboring nodes to facilitate transceiver pair clustering and IA solution generation. 
+
+{\textbf{\textit{Limiting coordination overhead}}} --- To compute IA solutions, classical IA algorithms requires not only the channel state information (CSI) of all participating transceiver pairs, but also the CSI of all interfering pairs. For a $K$-pair IA scheme, $K^2$ sets of CSI information are required for computing. To control the growth of coordination overhead, smaller clusters are preferable. Since IA engine must recalculate the IA precoder beamforms when the channel changes, coordination overhead also grows in high-mobility fast-fading environment, which is typical in tactical deployment. As a result, TMACN requires IA schemes that can significantly reduce the need for CSI acquisition feedback. Protocol level coordinations, such as determining the beginning and ending of the transmission, selecting time and frequency synchronization reference point, achieving synchronization, also incur overhead. An ideal solution for practical TMACN systems would achieve protocol level coordination with minimum cost.
+
+{\textbf{\textit{existing systems}}} ---fa
+
+
+
+In particular, tactical mobile ad hoc network (TMACN) poses several challenges to apply IA. 
 
 Several challenges have to be addressed in order to reap the benefits of IA in operational tactical mobile ad hoc network. 
 
-First, tactical networks are inherently heterogeneous. Dismounted soldier nodes and vehicle mounted radio transceivers have different requirements in terms of size, weight and power (SWaP). Hence, different nodes are equipped with different number of antennas. For example, the AN/PRC-154 Rifleman Radio that is being fielded now is a single transceiver radio. The AN/PRC-155 Manpack radio has two radio channels. More RF channels are potentially  available on vehicle mounted radios. 
+
 
 Second, unlikely commercial systems, TMACN usually doesn't have a centralized control plane. Therefore, IA relies on distributed coordination among peer nodes. 
 
@@ -104,17 +116,6 @@ First, tactical network is inherently heterogeneous.  size weight and power (SWa
 It requires several steps to incorporate IA into the TMACN operations. The first step is to identify IA opportunities. 
 
 In this project, we propose to design a software suite, which enables distributed interference alignment cooperations among tactical edge mobile nodes.  Since most existing military waveforms operate in slotted or TDMA mode, THE SYSTEM assumes a operational slotted network without IA as the baseline. In order to be backward compatible with existing tactical protocols,  where initial slot assignment is assumed to be performed by methods used in existing TMACN, such as SRW. Thus, each node possesses a series of time slots. The system level gain from IA comes from enabling other transceiver pairs to share time slots assigned to node ??. 
-
-In THE SYSTEM, IA cooperations among multiple nodes are accomplished in four steps. 
-
-First, IA opportunity identification. Each node maintains a neighbor table based on 
-
-Second, IA mode selection.
-
-Third, training and feedback based on the mode selected.
-
-Fourth, \cite{6472197}
-
 
 \section{PHASE I TECHICAL OBJECTIVES}
 
