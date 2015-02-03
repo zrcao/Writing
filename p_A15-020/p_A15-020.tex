@@ -1,5 +1,5 @@
 \documentclass[letterpaper,11pt,onecolumn]{article}
-%\usepackage{layout}
+\usepackage[textwidth=6.5in,textheight=8.5in]{geometry}
 \usepackage{graphicx}
 \usepackage{fancyhdr}
 \usepackage{array}
@@ -10,10 +10,10 @@
 %\usepackage{mathptmx}
 
 
-\hoffset=-0.74in
-\voffset= -0.8in
-\textwidth=6.5in
-\textheight=8.5in
+%\hoffset=-0.74in
+%\voffset= -0.8in
+%\textwidth=6.5in
+%\textheight=8.5in
 %\marginparwidth=0pt
 
 %\fancyhead{}
@@ -83,7 +83,7 @@ Theoretical investigation shows that a $K$-pair interference channel with IA can
 
 {\textbf{\textit{Limiting coordination overhead}}} --- To compute IA solutions, classical IA algorithms requires not only the channel state information (CSI) of all participating transceiver pairs, but also the CSI of all interfering pairs. For a $K$-pair IA scheme, $K^2$ sets of CSI information are required for computing. To control the growth of coordination overhead, smaller clusters are preferable. Since IA engine must recalculate the IA precoder beamforms when the channel changes, coordination overhead also grows in high-mobility fast-fading environment, which is typical in tactical deployment. As a result, TMACN requires IA schemes that can significantly reduce the need for CSI acquisition feedback. Protocol level coordinations, such as determining the beginning and ending of the transmission, selecting time and frequency synchronization reference point, achieving synchronization, also incur overhead. An ideal solution for practical TMACN systems would achieve protocol level coordination with minimum cost.
 
-
+In addition to above challenges, inserting new technology into military systems has to be an evolutional process, such that we can not only maximize the value of existing technology and capital investment, but also speed up the deployment of new technology. Applying IA into TMACN is no exception. We need to leverage existing TMACN operations when designing the approach to cluster IA transceivers pairs, and develop the algorithm for computing IA solutions. At times when IA is unfeasible or do not offer expected capacity gains, radios must be able to continue operate in the conventional mode.
 
 %In particular, tactical mobile ad hoc network (TMACN) poses several challenges to apply IA. 
 %Several challenges have to be addressed in order to reap the benefits of IA in operational tactical mobile ad hoc network. 
@@ -99,9 +99,14 @@ Theoretical investigation shows that a $K$-pair interference channel with IA can
 %  2. Hierarchical network architecture
 % It requires several steps to incorporate IA into the TMACN operations. The first step is to identify IA opportunities. 
 
+\section{PHASE I TECHICAL OBJECTIVES}
+
+% A self-organizing interference alignment scheme supporting distributed clustering
+% Built on the existing medium access control schemes widely adopted in TMACN.  
+
 In this project, we propose to design a software suite, which enables distributed interference alignment cooperations among tactical edge mobile nodes.  Since most existing military waveforms operate in slotted or TDMA mode, THE SYSTEM assumes a operational slotted network without IA as the baseline. In order to be backward compatible with existing tactical protocols,  where initial slot assignment is assumed to be performed by methods used in existing TMACN, such as SRW. Thus, each node possesses a series of time slots. The system level gain from IA comes from enabling other transceiver pairs to share time slots assigned to node ??. 
 
-\section{PHASE I TECHICAL OBJECTIVES}
+
 
 \section{PHASE I WORK PLAN}
 
