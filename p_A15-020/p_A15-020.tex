@@ -114,10 +114,10 @@ In this project, we propose to design a software suite, which enables distribute
 \end{center}
 \end{figure}
 
-The proposed scheme will use the time slot assignment schemes of existing TMACN tactical waveforms. SRW and WNW are all based on TDMA. The benefits of leveraging existing time slots assignment schemes have two folders. 
+The proposed SOIA scheme will use the time slot assignment schemes of existing TMACN tactical waveforms. SRW and WNW are all based on TDMA. The benefits of leveraging existing time slots assignment schemes have two folders. 
 \begin{itemize}[noitemsep,nolistsep]
-\item It simplifies IA technology insertion and assures the system is backward compatible. When 
-\item It is a convenient method to designate the cluster head for an ad hoc IA clustering, which is the critical first step in the proposed SOIA scheme which has a simplified clustering strategy with low coordination overhead.
+\item SOIA simplifies IA technology insertion and assures the system is backward compatible. There is no need to reinvent a complete communication protocol stack. Instead, SOIA can be realized as add-on software and firmware modules to be inserted into existing radio systems. When the channel condition doesn't warrant the gain of using IA, the radios can easily revert back to non-IA operations if using the same MAC frame slots assignment. Furthermore, SOIA supports radio deployment in phases by mixing radios with and without IA support within the same TMACN, since all radios follow the same slot assignment schemes.
+\item SOIA designates the IA cluster head unambiguously and without coordination overhead. As shown in Fig Identifying the cluster ``head pair"  is the critical first step in the proposed SOIA scheme.  Given the cluster ``head pair", SOIA simplifies clustering strategy with low coordination overhead.
 \end{itemize}
 
 
