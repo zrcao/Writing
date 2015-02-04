@@ -8,7 +8,7 @@
 \usepackage{tgtermes}
 \usepackage[T1]{fontenc}
 %\usepackage{mathptmx}
-
+\usepackage{enumitem}
 
 %\hoffset=-0.74in
 %\voffset= -0.8in
@@ -105,6 +105,20 @@ In addition to above challenges, inserting new technology into military systems 
 % Built on the existing medium access control schemes widely adopted in TMACN.  
 
 In this project, we propose to design a software suite, which enables distributed interference alignment cooperations among tactical edge mobile nodes.  Since most existing military waveforms operate in slotted or TDMA mode, THE SYSTEM assumes a operational slotted network without IA as the baseline. In order to be backward compatible with existing tactical protocols,  where initial slot assignment is assumed to be performed by methods used in existing TMACN, such as SRW. Thus, each node possesses a series of time slots. The system level gain from IA comes from enabling other transceiver pairs to share time slots assigned to node ??. 
+
+\begin{figure}[h]
+\begin{center}
+\includegraphics[width=0.5\textwidth]{../figures/InterferenceAlignment_1.png}
+\caption{TBD}
+\label{fig:IA_SingleRx}
+\end{center}
+\end{figure}
+
+The proposed scheme will use the time slot assignment schemes of existing TMACN tactical waveforms. SRW and WNW are all based on TDMA. The benefits of leveraging existing time slots assignment schemes have two folders. 
+\begin{itemize}[noitemsep,nolistsep]
+\item It simplifies IA technology insertion and assures the system is backward compatible. When 
+\item It is a convenient method to designate the cluster head for an ad hoc IA clustering, which is the critical first step in the proposed SOIA scheme which has a simplified clustering strategy with low coordination overhead.
+\end{itemize}
 
 
 
