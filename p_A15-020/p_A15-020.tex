@@ -1,4 +1,4 @@
-\documentclass[letterpaper,11pt,onecolumn]{article}
+\documentclass[letterpaper,11pt]{article}
 \usepackage[textwidth=6.5in,textheight=8.5in]{geometry}
 \usepackage{graphicx}
 \usepackage{fancyhdr}
@@ -31,7 +31,7 @@
 
 \begin{document}
 
-\thispagestyle{fancy}
+%\thispagestyle{fancy}
 
 %\maketitle
 
@@ -48,9 +48,9 @@ zcao@c3commsystems.com
 
 \vspace{0.1in}
 
-\abstract
-
+\begin{abstract}
 Theoretical studies have shown the interference alignment has the potential to significantly improve the capacity of a wireless network. However, realizing interference alignment in practical networks requires costly coordination overhead, which may cancel out the gains obtained from interference alignment. In addition, it is a challenging task to group multiple transceiver pairs for interference alignment in a mobile ad hoc network where there is no centralized control.This proposal introduces self-organizing interference alignment (SOIA), a distributed approach for constructing clusters of transceiver pairs to perform interference alignment in a tactical mobile ad hoc communication network (TMACN). SOIA significantly reduces the coordination overhead by computing solutions locally at each individual receiver without requiring the channels of other receivers. SOIA leverages existing TMACN medium access control (MAC) scheme, thus it enables the seamless coexistence of  SOIA and non-SOIA radio nodes in the same network. The resulting SOIA product is expected to have low cost and supports a phased roll-out for speedy deployment without causing disruptions to existing equipment. In the proposed phase I and phase I option effort, we will develop the SOIA approach, comparatively evaluate its performance in simulation, and design a detailed Phase II prototyping and demonstration plan.
+\end{abstract}
 
 \newpage
 
@@ -141,20 +141,23 @@ To form a transient IA cluster in a distributed way, it is necessary to identify
 
 With the cluster head pair given, the next step in SOIA is to select other transceiver pairs from the neighborhood. These other pairs should be able to transmit at the same time with the head pair. Using IA, the interference among all pairs are under control such that the receiver of each pair can successful decode its message with high probability. 
 
-A global optimum IA solution requires the channel knowledge from each transmitter of a cluster to all receivers in the same cluster. Instead of spending overhead resources to collect all channel information, a receiver can compute a local IA solution based on its estimated channels without considering the channels seen by other receivers. As an example, in Fig.~\ref{fig:IA_SingleRx}, the pair of node 1 and node 2 is the head pair, in which node 2 is the transmitter and node 1 is the receiver. It is reasonable to assume that each radio node in TMACN keeps track of its neighbors and the channels from these neighbors to itself. The estimates of these channels can be acquired and kept up-to-date locally. In Fig.~\ref{fig:IA_SingleRx},  radio node 1 has $K-1$ neighboring nodes. Let ${\bf{H}}_{1k}$ denote the channel between node $k$ and node 1. Node 1 can keep track of ${\bf{H}}_{1k}$ by performing channel estimations based not only on periodic beacon signals sent by node $k$, but also on any signal sent by $k$ regardless of whether node 1 is the intended recipient. 
+A global optimum IA solution requires the channel knowledge from each transmitter of a cluster to all receivers in the same cluster. Instead of spending overhead resources to collect all channel information, a receiver can compute a local IA solution based on its estimated channels without considering the channels seen by other receivers. As an example, in Fig.~\ref{fig:IA_SingleRx}, the pair of node 1 and node 2 is the head pair, in which node 2 is the transmitter and node 1 is the receiver. It is reasonable to assume that each radio node in TMACN keeps track of its neighbors and the channels from these neighbors to itself. The estimates of these channels can be acquired and kept up-to-date locally. In Fig.~\ref{fig:IA_SingleRx},  radio node 1 has $K-1$ neighboring nodes. Let ${\bf{H}}_{1k}$ denote the channel between node $k$ and node 1. Node 1 can keep track of ${\bf{H}}_{1k}$ by performing channel estimations based not only on periodic beacon signals sent by node $k$, but also on any signal sent by node $k$ regardless of whether node 1 is the intended recipient. 
 
 The algorithm for local IA is given in the following using node 1 in Fig.~\ref{fig:IA_SingleRx}. To align the transmissions of all neighbors, node 1 shall compute the transmission beamforming vectors ${\boldsymbol{v}}_k$ for $k=2, 3, \cdots, K$ such that
-
 \begin{equation}\label{bfCapacity}
 C_{bf}=\displaystyle\max_{{\boldsymbol{v}}_2}\log\left(1+\frac{\boldsymbol{v}_2^{*}\mathbf{H}_{12}^{*}\mathbf{H}_{12}\boldsymbol{v}_2}{\sigma^2}\right)
 \end{equation}
 and
-\begin{equation}
-\boldsymbol{v}_k^{*}\mathbf{H}_{1k}^{*}\mathbf{H}_{12}\boldsymbol{v}_2=\mathbf{0}, {\rm{for}}~k=3,4,\cdots,K.
+\begin{equation}\label{nullbfvec}
+\boldsymbol{v}_k^{*}\mathbf{H}_{1k}^{*}\mathbf{H}_{12}\boldsymbol{v}_2=\mathbf{0}, {\rm{for}}~k=3,4,\cdots~K.
 \end{equation}
+In the above In Eq. (\ref{bfCapacity}), node 1 calculates the transmitter beamforming vector for node 2, which maximizes the capacity between node 2 and node 1. The optimum $\boldsymbol{v}_2$ maximizing $C_{bf}$ is the one that maximizes the quadratic form $|\boldsymbol{v}_2^*\boldsymbol{\Phi}\boldsymbol{v}_2|$, where $\boldsymbol{\Phi}=\mathbf{H}_{12}^{*}\mathbf{H}_{12}$. So $\boldsymbol{v}_2$ is the eigenvector corresponding to the largest eigenvalue of $\boldsymbol{\Phi}$. Node 1 sends $\boldsymbol{v}_2$ to node 2 so the latter will use it as the transmitter beamforming vector. The desired signal space of node 2 is thus given by $\mathbf{H}_{12}\boldsymbol{v}_2$. 
 
+In the next step, node 1 computes the beamforming vectors for all other potential interference sources in its neighborhood, i.e., node 3, 4, $\cdots~K$. More specifically, node 1 aligns all potential interference in the subspace that is orthogonal to its desired signal space. Let $\boldsymbol{v}_k$ be the transmitter beamforming vector for node k. Node 1 computes $\boldsymbol{v}_k$ such that Eq.~(\ref{nullbfvec}) holds true for nodes 3, 4, $\cdots~K$. Node 1 will broadcast vectors $\boldsymbol{v}_3$, $\boldsymbol{v}_4$, $\cdots$ $\boldsymbol{v}_K$ along with $\boldsymbol{v}_2$. Therefore, every node in the neighborhood of node 1 not only knows its own beamforming vector, but also the beamforming vector of all other nodes.
 
+Without IA coordination, nodes 3, 4, $\cdots~K$ cannot transmit during the time slots assigned to node 2, which will use these slots to send information to node 1. By computing and broadcasting beamforming vectors $\boldsymbol{v}_3$, $\boldsymbol{v}_4$, $\cdots$ $\boldsymbol{v}_K$, node 1 provides an opportunity for some of these nodes to join the transient IA cluster headed by node 1 and 2 without impacting the transmission from node 2 to node 1. 
 
+\subsubsection{Cluster Member Selection}
  
 
 \subsection{Performance Analysis}
