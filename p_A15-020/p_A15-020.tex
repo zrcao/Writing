@@ -143,9 +143,7 @@ With the cluster head pair given, the next step in SOIA is to select other trans
 
 A global optimum IA solution requires the channel knowledge from each transmitter of a cluster to all receivers in the same cluster. Instead of spending overhead resources to collect all channel information, a receiver can compute a local IA solution based on its estimated channels without considering the channels seen by other receivers. As an example, in Fig.~\ref{fig:IA_SingleRx}, the pair of node 1 and node 2 is the head pair, in which node 2 is the transmitter and node 1 is the receiver. It is reasonable to assume that each radio node in TMACN keeps track of its neighbors and the channels from these neighbors to itself. The estimates of these channels can be acquired and kept up-to-date locally. In Fig.~\ref{fig:IA_SingleRx},  radio node 1 has $K-1$ neighboring nodes. Let ${\bf{H}}_{1k}$ denote the channel between node $k$ and node 1. Node 1 can keep track of ${\bf{H}}_{1k}$ by performing channel estimations based not only on periodic beacon signals sent by node $k$, but also on any signal sent by node $k$ regardless of whether node 1 is the intended recipient. 
 
-The algorithm for local IA is given in the following using node 1 in Fig.~\ref{fig:IA_SingleRx}. Considering the heterogeneous radio configuration in TMACN, for simplicity, we assume in the following that each radio has only 2 antennas.  
- 
-To align the transmissions of all neighbors, node 1 shall compute the transmission precoder vectors ${\boldsymbol{v}}_k$ for node $k=2, 3, \cdots, K$ such that
+The algorithm for local IA is given in the following using node 1 in Fig.~\ref{fig:IA_SingleRx}. Considering the heterogeneous radio configuration in TMACN, for simplicity, we assume in the following that each radio has only 2 antennas. So, out of the 2 dimensional vector space each radio, one dimension is the signal space of the radio while the other is the interference space. To align the transmissions of all neighbors, node 1 computes the transmission precoder beam forming vectors ${\boldsymbol{v}}_k$ for node $k=2, 3, \cdots, K$ such that
 \begin{equation}\label{bfCapacity}
 C_{bf}=\displaystyle\max_{{\boldsymbol{v}}_2}\log\left(1+\frac{\boldsymbol{v}_2^{*}\mathbf{H}_{12}^{*}\mathbf{H}_{12}\boldsymbol{v}_2}{\sigma^2}\right)
 \end{equation}
@@ -161,7 +159,9 @@ Without IA coordination, nodes 3, 4, $\cdots~K$ cannot transmit during the time 
 
 \subsubsection{Cluster Member Selection}
  
- 
+Since node 1 broadcasts the precoder beamforming vectors  $\boldsymbol{v}_2$, $\boldsymbol{v}_3$, $\cdots$ $\boldsymbol{v}_K$, each neighbor node not only knows its own transmission vector, but also the transmission vectors of all other nodes. Node 3, 4, $\cdots$, $K$ use this knowledge to determine whether it can, as a receiver, join the transient IA cluster headed by node 1 and 2, and also determines the transmitter node at the same time. 
+
+Node $l$, similar to node 1, keeps track of $\boldsymbol{H}_{lk}$ by performing channel estimations based not only on periodic beacon signals sent by node $k$, but also on any signals sent by node $k$ regardless whether node $l$ is the intended recipient. Therefore, node $l$ can calculate the local subspace occupied by the interference from node 1, which is $\boldsymbol{H}_{l1}\boldsymbol{v}_{1}$.  Similarly, the local subspace occupied by potential signals from node $k$ is given by $\boldsymbol{H}_{lk}\boldsymbol{v}_{k}$.
  
 
 \subsection{Performance Analysis}
