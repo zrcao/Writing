@@ -28,6 +28,7 @@
 
 %\title{\bf{Self-Organizing Interference Alignment (SOIA)\\for Tactical Mobile Edge Networks}}
 
+\let\bs\boldsymbol
 
 \begin{document}
 
@@ -53,6 +54,8 @@ Theoretical studies have shown the interference alignment has the potential to s
 \end{abstract}
 
 \newpage
+
+\setcounter{page}{1}
 
 \section{IDENTIFICATION \& SIGNIFICANCE OF THE OPPORTUNITY}
 
@@ -163,9 +166,30 @@ Since node 1 broadcasts the precoder beamforming vectors  $\boldsymbol{v}_2$, $\
 
 Node $l$, similar to node 1, keeps track of $\boldsymbol{H}_{lk}$ by performing channel estimations based not only on periodic beacon signals sent by node $k$, but also on any signals sent by node $k$ regardless whether node $l$ is the intended recipient. Therefore, node $l$ can calculate the local subspace occupied by the interference from node 1, which is $\boldsymbol{H}_{l1}\boldsymbol{v}_{1}$.  Similarly, the local subspace occupied by potential signals from node $k$ is given by $\boldsymbol{H}_{lk}\boldsymbol{v}_{k}$.
  
+Let $\mathbf{B}_{j,l}$ denote the precoder matrix transmitter node $l$ uses for the receiver node $j$, which maximizes the received SNR at node $j$. $\mathbf{B}_{j,l}=[\bs{b}_{j,l,1}~\bs{b}_{j,l,2}\cdots~\bs{b}_{j,l,S}]$, where $S$ is the number of data streams node $l$ sends to node $j$. If node $l$ sends only a single data stream to node $j$, $\mathbf{B}_{j,l}=\bs{b}_{j,l,1}$. Let $\mathbf{H}_{k,l}$ be the channel between the node $l$ and node $k$. The transmission from node $l$ to node $j$ causes interference at node $k$ with its subspace signature given by
+\begin{equation}
+\mathbf{P}^{[k]}_{j,l}=\mathbf{H}_{k,l}\mathbf{B}_{j,l}
+\end{equation}
+For any node $k$, $k\neq j$ and $k\neq l$, $\mathbf{P}^{[l]}_{j,l}$ can be estimated by
+\begin{equation}\label{equ:estimate_interference_signature}
+\hat{\mathbf{P}}^{[k]}_{j,l} = \mathbf{Y}_{k,l}\mathbf{X}^{-1}=\left(\mathbf{H}_{r,l}\mathbf{B}_{j,l}\mathbf{X}+\mathbf{N}_r\right)\mathbf{X}^{-1}=\mathbf{H}_{r,l}\mathbf{B}_{j,l}+\mathbf{NX}^{-1}_.
+\end{equation}
+In Eq.~(\ref{equ:estimate_interference_signature}),  $\mathbf{X}$ is a training structure known to all nodes. $\mathbf{Y}_{k,l}$ is the training signal received by node $k$ from node $l$. In Section~\ref{sec:frame_and_protocol}, the IA subframe structure is introduced, where a dedicated interference training period is inserted. During this interference training period, only node $l$ transmits. Therefore, each node in $l$'s neighbor can estimate the subspace signature it sees from the transmission from $l$ to $j$.
 
-\subsection{Performance Analysis}
+SOIA reuses existing MAC slots assignment schemes. The node with assigned slots automatically assumes the cluster head position of a transient IA cluster. Hence, every pair of nodes with on-going traffic have the opportunity to lead its own transient IA cluster within a TMACN TDMA frame. Using the sub frame structure introduced in Section~\ref{sec:frame_and_protocol}, the receiving node of any head pair, node $r$, is able to keep track of $\hat{\mathbf{P}}^{[r]}_{j,l}$ for all potential transceiver pairs among its neighbors. Therefore, the head pair receiver node $r$ not long knows 
 
+During phase I, we plan to evaluate the following two approaches for cluster member selection.
+
+ 
+
+
+\subsection{Develop Protocol and Frame Structure}\label{sec:frame_and_protocol}
+
+To the end, at the protocol level, a training signal has to included during the transmission from $l$ to $j$, during which no other IA participa  
+
+\subsection{Analyze System Performance}
+
+\subsection{Plan Phase II Prototyping and Demonstration}
 
 \section{PHASE I WORK PLAN}
 
