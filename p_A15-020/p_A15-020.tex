@@ -111,7 +111,14 @@ In addition to above challenges, inserting new technology into military systems 
 % A self-organizing interference alignment scheme supporting distributed clustering
 % Built on the existing medium access control schemes widely adopted in TMACN.  
 
-The overall PHASE I technical objective is to investigate, design and evaluate an interference alignment scheme, which not only can improve the capacity of TMACN, but also is practical for prototyping, demonstration and transition. Specifically, this scheme should be able to dynamically form IA transceiver clusters without a central control plane,  operate flexibly with heterogeneous radio nodes, and significantly reduce coordination feedbacks. 
+The overall PHASE I technical objective is to investigate, design and evaluate an interference alignment scheme, which not only can improve the capacity of TMACN, but also is practical for prototyping, demonstration and transition. Specifically, this scheme should be able to dynamically form IA transceiver clusters without a central control plane,  operate flexibly with heterogeneous radio nodes, and significantly reduce coordination feedbacks. There are four technical objectives for the Phase I effort including the Phase I option. These objectives are
+\begin{itemize}[noitemsep,nolistsep]
+\item{Design Self-organizing Interference Alignment (SOIA) for Tactical Networks}
+\item{Evaluate System Performance}
+\item{Develop Protocol Frame Structure}
+\item{Plan Phase II Prototyping and Demonstration}
+\end{itemize}
+In the following sections, the above four technical objectives are described in detail. 
 
 %The objectives of this proposal to develop a practical interference alignment scheme that is applicable to transmission scheme 
 
@@ -170,8 +177,6 @@ Node $r$ feeds back the matrix $\mathbf{B}_{r,t}$ to node $t$. The feedback over
 %In the next step, node 1 computes the beamforming vectors for all other potential interference sources in its neighborhood, i.e., node 3, 4, $\cdots~K$. More specifically, node 1 aligns all potential interference in the subspace that is orthogonal to its desired signal space. Let $\boldsymbol{v}_k$ be the transmitter beamforming vector for node k. Node 1 computes $\boldsymbol{v}_k$ such that Eq.~(\ref{nullbfvec}) holds true for nodes 3, 4, $\cdots~K$. Node 1 will broadcast vectors $\boldsymbol{v}_3$, $\boldsymbol{v}_4$, $\cdots$ $\boldsymbol{v}_K$ along with $\boldsymbol{v}_2$. Therefore, every node in the neighborhood of node 1 not only knows its own beamforming vector, but also the beamforming vector of all other nodes.
 
 %Without IA coordination, nodes 3, 4, $\cdots~K$ cannot transmit during the time slots assigned to node 2, which will use these slots to send information to node 1. By computing and broadcasting beamforming vectors $\boldsymbol{v}_3$, $\boldsymbol{v}_4$, $\cdots$ $\boldsymbol{v}_K$, node 1 provides an opportunity for some of these nodes to join the transient IA cluster headed by node 1 and 2 without impacting the transmission from node 2 to node 1. 
-
-
 
 \subsubsection{Cluster Member Selection}\label{member_selection}
  
@@ -236,19 +241,40 @@ $$
 $$
 In other words, node $j$ selects the third pair for the IA cluster from the joint set $\mathcal{Z}$. The chosen pair $z$ has the least interference energy projection onto node $j$'s signal subspace. Node $j$ broadcast it selection. This process continues until no more pairs can be selected. For all chosen pairs except the head pair, the receiver nodes computes the equalizer matrices using the same method introduced in the centralized selection scheme.
 
-In summary, 
+The SOIA approach is designed to materialize the capacity gain of interference alignment in practical tactical network operations with realistic moderate SNR for communication links. The SOIA approach emphasizes maximizing SNR for the cluster head pair while minimizing interference power for non-head pairs in an IA cluster. In particular, SOIA solutions are computed distributedly with only local channel knowledge. Therefore, SOIA significantly reduces the coordination overhead and is practical for real world tactical network operations.
 
-\subsection{Analyze System Performance}
+\subsection{Evaluate System Performance}
 
+During the Phase I effort, we plan to model the SOIA approach in MATLAB and develop MATLAB-based simulator to evaluate the SOIA system performance. The SOIA team recognizes that it is extremely important to have a high fidelity physical layer propagation model in order to evaluate the SOIA system performance. Many networking simulation tools, such as Qualnet and OpNet, have naïve physical layer models. The SOIA team has extensive experience in realistic MIMO channel modeling and in using Ericsson's RUNE (Rudimentary Network Emulator)~\cite{ZandRRM:book:2001}, a MATLAB-based TDMA wireless networking simulation tool available to public. We will incorporate many features of RUNE into the SOIA performance simulation.
 
-\subsection{Develop Protocol and Frame Structure}\label{sec:frame_and_protocol}
+\subsubsection{Spatial Channel Models for MANET}
+
+Accurate physical layer MIMO channel modeling is critical for simulation based TMACN evaluation. During Phase I effort, we will adopt and adapt the industry standard MIMO spatial channel model, the 3GPP spatial channel model (SCM) for MIMO simulations~\cite{3GPP:SCM}.  The SOIA team has prior experience implementing 3GPP SCM in MATLAB under the Ericsson RUNE framework. 
+
+The 3GPP SCM was developed for cellular network simulation. However, by lowering the antenna height, we could easily convert it into system level simulation for mobile ad hoc networks. For a given laydown of $N$ radio nodes, the planned simulator will generate a $N-1$ by $N-1$ path gain matrix between all possible transceiver pairs. The fast fading MIMO coefficients will be generated according to the 3GPP SCM. The path gain between any pair of radios is the sum of the distance-based path loss and the lognormal shadowing. For the distance based path loss, similar to the 3GPP Spatial Channel Model~\cite{3GPP:SCM}, we will use the COST 231 Walfish-Ikegami NLOS and LOS models. The lognormal shadowing for the NLOS has a standard deviation of 10dB, and that for LOS is 4dB, as given in~\cite{3GPP:SCM}. Furthermore, for the same transmitter, two closely located receivers have correlated lognormal shadowing. We use a pre-generated correlated lognormal map, from which each tactical receiver?s lognormal shadowing can be derived based on its location. Fig.~\ref{fig:lognormalmap} shows an example of correlated lognormal shadowing map over an area of 300 meters by 300 meters.
+
+\begin{figure}[h]
+\begin{center}
+\includegraphics[width=0.66\textwidth]{../figures/lognormalmap.jpg}
+\caption{\small An example of correlated lognormal shadowing map over an area of 300 meters by 300 meters. The unit for the vertical axis is dB.}
+\label{fig:lognormalmap}
+\end{center}
+\end{figure}
+
+\subsubsection{Mobility Trace}
+Due to tactical radio mobility, the channel and the path loss between any pair of transmitters changes slot by slot.  In Phase I simulation, we assume that the platoon is patrolling in an urban area. We use a complex value (in other words, a 2-dimensional vector) to represent node speed, in which the L2 norm of the complex value represents the absolute value of the speed (m/s); and the direction of the complex value represents the mobility direction. For each slot, changes in the speed and its direction of each radio are randomly generated based on the average speed and acceleration of each radio. As a result, each radio will have a new position in the 2-D plan for every TDMA slot. The new positions are then used in the physical channel model to calculate the received signal strength at each tactical radio from all potential transmitters. 
+
+The mobility traces not only can be randomly generated from the Matlab simulator, but also can be incorporated from real operation collections as well as Google Earth KML files. This feature enable us to evaluate the SOIA system performance in a realistic tactical maneuver.
+
+%\subsubsection{System Performance Metric}
+
+\subsection{Develop Protocol Frame Structure}\label{sec:frame_and_protocol}
 
 To the end, at the protocol level, a training signal has to included during the transmission from $l$ to $j$, during which no other IA participa  
 
-
-
-
 \subsection{Plan Phase II Prototyping and Demonstration}
+
+
 
 \section{PHASE I WORK PLAN}
 

@@ -29,4 +29,13 @@
 \emph{Joint Operational Access Concept (JOAC)}, Department of Defense, January
   2012.
 
+\bibitem{ZandRRM:book:2001}
+J.~Zander, O.~Queseth, S.-L. Kim, and M.~Almgren, \emph{Radio Resource
+  Management for Wireless Networks}, ser. Mobile Communications Series.\hskip
+  1em plus 0.5em minus 0.4em\relax Artech House, March 2001.
+
+\bibitem{3GPP:SCM}
+``Spacial channel model for multiple input multiple output ({MIMO})
+  simulations,'' 3GPP, Techical Report 3GPP TR 25.996 V11.0.0, September 2012.
+
 \end{thebibliography}
