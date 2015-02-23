@@ -14,6 +14,7 @@
 \usepackage{colortbl,hhline}
 \definecolor{c1}{rgb}{0.30980, 0.50588, 0.73725}
 \definecolor{c2}{rgb}{0.82353, 0.87843, 0.92941}
+\usepackage{longtable}
 
 %\hoffset=-0.74in
 %\voffset= -0.8in
@@ -27,7 +28,7 @@
 \lhead{\includegraphics[width=0.25\textwidth]{../figures/C-3logo.png}}
 \chead{Proposal Number\\A151-020-0273}
 \rhead{Topic Number\\A15-020}
-\cfoot{\textcopyright C-3 Comm Systems LLC. Proprietary. All Rights Reserved.}
+\cfoot{\textcopyright~C-3 Comm Systems LLC. Proprietary. All Rights Reserved.}
 \rfoot{\thepage}
 
 \pagestyle{fancy}
@@ -289,12 +290,24 @@ Since the introduction, interference alignment has attracted the attention of ma
 
 Several recent papers investigated the issue of applying IA in cellular network [][]. Note that reference [] is published by Professor Bhaskar Rao, who is consultant of C-3 Comm Systems on this proposal. Applying IA in cellular networks is relatively convenient since cellular systems have centralized control plane and high-speed wired network connecting base stations. Therefore, cellular systems are able to aggregate the channel knowledge of all users for optimum user clustering and computing IA solution. The same cannot be said for tactical mobile ad hoc networks. In general, TMACN doesn't have a centralized control plane. Furthermore, TMACN usually operates in low to moderate SNR range. Interference alignment has to be considered jointly with SNR enhancement. Therefore, applying IA to TMACN network is very challenging. In addition, prototyping IA schemes in tactical software defined radio platforms with MIMO capability further increase the difficulty of this SBIR topic.
 
-The PI at C-3 Comm Systems brings a combined expertise on the operation of tactical networks and software defined radio system prototyping. These combined experience position C-3 Comm Systems as a strong contender to fulfill the requirements of this SBIR topic and deliver to Army a working demonstration of TMACN operating with interference alignment.
+The PI at C-3 Comm Systems brings a combined expertise on the operation of tactical networks and software defined radio system prototyping. These combined experience position C-3 Comm Systems as a strong contender to fulfill the requirements of this SBIR topic and deliver to Army a working demonstration of TMACN operating with interference alignment. Table~\ref{tab:relatedwork} lists related work the PI performed.
 
-\begin{table}
-\caption{default}
-\begin{center}
-\begin{tabular}{|>{\arraybackslash}p{\textwidth}|}
+\LTcapwidth=\textwidth
+\begin{longtable}{|>{\arraybackslash}p{\textwidth}|}
+%\begin{table}[h]
+\caption{Prior research and development activities related to the proposed SOIA project.}\label{tab:relatedwork}\\ 
+%\begin{center}
+%\begin{tabular}{|>{\arraybackslash}p{\textwidth}|}
+\hline
+\rowcolor{c1}{
+\begin{tabular}{@{}l@{}}
+\color{white}{\textbf{Project: Subspace-based Methods for OFDMA Uplink Synchronization}}\\ 
+\color{white}{\textbf{Sponsor: Stevens Institute of Technology}}\\ 
+\end{tabular}}\\
+\hline
+\rowcolor{c2} {\textbf{Project Summary:}} Zhongren Cao (C-3 Comm Systems) investigated and developed subspace-based algorithms for OFDMA uplink multiuser frequency synchronization. The multiuser carrier frequency offset estimation algorithm developed by Dr. Cao is based on the MUSIC algorithm, which leverages the orthogonality between signal subspace and noise subspace. \\
+\hline
+{\textbf{Relevance to SOIA:}} Interference alignment schemes align all interferences into a subspace that is orthogonal to the signal subspace at each individual receiver. Subspace-based signal processing is at the heart of interference alignment. This project, albeit a decade ago, demonstrates that C-3 Comm Systems has in-depth understanding and extensive experience in applying subspace-based signal processing algorithms for wireless communications.\\
 \hline
 \rowcolor{c1}{
 \begin{tabular}{@{}l@{}}
@@ -302,19 +315,41 @@ The PI at C-3 Comm Systems brings a combined expertise on the operation of tacti
 \color{white}{\textbf{Sponsor: DARPA}}\\ 
 \end{tabular}}\\
 \hline
-\rowcolor{c2} {\textbf{Project Summary:}} Dr. Cao (C-3 Comm Systems) was a senior personnel on the USC/ISI mobile system integrators (MSI) team for the CBMEN program, which developed algorithms for content storage, distribution, and access at the tactical edge by small unit warfighters.  Dr. Cao led USC/ISI's effort to establish an EMANE-based networking emulation lab with multiple high-end Linux servers and more than 150 Android phones. Furthermore, Dr. Cao planned and executed a month long large-scale field test and demonstration event for the Phase I CBMEN program at Ft. A. P. Hill. In this event, USC/ISI designed and deployed a platoon size heterogeneous MANET network over a 2 kilometers long hilly range, using both Rifleman radios and commercial-off-the-shelf (COTS) Android phones. \\
+\rowcolor{c2} {\textbf{Project Summary:}} Zhongren Cao (C-3 Comm Systems) was a senior personnel on the USC/ISI mobile system integrators (MSI) team for the DARPA CBMEN program, which developed algorithms for content storage, distribution, and access at the tactical edge by small unit warfighters.  Dr. Cao led USC/ISI's effort to establish an EMANE-based networking emulation lab with multiple high-end Linux servers and more than 150 Android phones. Furthermore, he planned and executed a month long large-scale field test and demonstration event for the Phase I CBMEN program at Ft. A. P. Hill. In this field event, Dr. Cao designed and deployed a platoon size heterogeneous MANET network over a 2 kilometers long hilly range, using both Rifleman radios and commercial-off-the-shelf (COTS) Android phones. \\
 \hline
-{\textbf{Relevance to SOIA:}} \\
-\hline\hline
-\end{tabular}
-\end{center}
-\label{default}
-\end{table}%
- 
+{\textbf{Relevance to SOIA:}} The DARPA CBMEN experience helped us understand typical maneuvers of platoons and squads in tactical edge networks, and enabled us to gain insights into the mobility traces and traffic patterns resulted from these maneuvers. During SOIA Phase I effort, C-3 Comm Systems will leverage these insights and apply tactical-relevant mobility traces and traffic patterns to evaluate the SOIA system performance for tactical operations.\\
+\hline
+\rowcolor{c1}{
+\begin{tabular}{@{}l@{}}
+\color{white}{\textbf{Project: Small-scale SDR Network Test-bed for Innovative Wireless Access Concepts }}\\ 
+\color{white}{\textbf{Sponsor: Ericsson Research}}\\ 
+\end{tabular}}\\
+\hline
+\rowcolor{c2} {\textbf{Project Summary:}} Zhongren Cao led the design and implementation of an OFDM modem on FPGA SoC using the WARP platform from Mango Communications and Rice University. The modem design encompasses complete PHY layer and MAC layer systems. Using multiple WARP platforms, Dr. Cao demonstrated cognitive relay, coordinated multi-points (CoMP) and device-to-device systems to the sponsor. \\
+\hline
+{\textbf{Relevance to SOIA:}} This SBIR calls for the demonstration of the proposed interference alignment scheme, i.e., SOIA, in a platoon size wireless ad hoc network. The Ericsson project shows that C-3 Comm Systems has extensive experience in planning, implementing and demonstrating software defined radio based wireless network systems from controlling radio front-end, firmware development for complex physical layer algorithms for MIMO, software development for medium access control and system integration with networking functions and applications.\\
+\hline
+\rowcolor{c1}{
+\begin{tabular}{@{}l@{}}
+\color{white}{\textbf{Project: SCA-Compliant Public Safety P25-FM3TR-VoIP Bridge }}\\ 
+\color{white}{\textbf{Sponsor: DoD JTRS JPEO}}\\ 
+\end{tabular}}\\
+\hline
+\rowcolor{c2} {\textbf{Project Summary:}} Over a period of three years, the project team developed an SCA-compliant SDR implementation of the FM3TR waveform, an SCA-compliant SDR implementation of the public safety P25 terminals, and finally a VoIP bridge that connects the voice channel among the two systems. The SDR platforms used in the project include USRP N210 and SDR 4000 from Spectrum Signal Processing. Zhongren Cao was the lead system engineer overseeing three software developers to successfully complete the project goals.\\
+\hline
+{\textbf{Relevance to SOIA:}} This JTRS sponsors project helped us to understand the thinking and practices of software defined radio node framework and operating environment (OE) adopted by DoD. C-3 Comm Systems will work with our DoD transition partners to incorporate the appropriate SDR framework and OE in the prototyping of SOIA systems during Phase II in order to speed up the transition.\\
+\hline
+%\end{tabular}
+%\end{center}
+%\label{default}
+%\end{table}%
+\end{longtable} 
 
 \section{RELATIONSHIP WITH FUTURE RESEARCH OR RESEARCH AND DEVELOPMENT}
 
 \section{COMMERCIALIZATION STRATEGY}
+
+C-3 Comm Systems plans to commercialize the SOIA technology in both the DoD market and consumer market.
 
 \section{KEY PERSONNEL}
 
