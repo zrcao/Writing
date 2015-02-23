@@ -9,6 +9,11 @@
 \usepackage[T1]{fontenc}
 %\usepackage{mathptmx}
 \usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage[usenames,dvipsnames,svgnames,table]{xcolor}
+\usepackage{colortbl,hhline}
+\definecolor{c1}{rgb}{0.30980, 0.50588, 0.73725}
+\definecolor{c2}{rgb}{0.82353, 0.87843, 0.92941}
 
 %\hoffset=-0.74in
 %\voffset= -0.8in
@@ -263,7 +268,8 @@ The 3GPP SCM was developed for cellular network simulation. However, by lowering
 \end{figure}
 
 \subsubsection{Mobility Trace}
-Due to tactical radio mobility, the channel and the path loss between any pair of transmitters changes slot by slot.  In Phase I simulation, we assume that the platoon is patrolling in an urban area. We use a complex value (in other words, a 2-dimensional vector) to represent node speed, in which the L2 norm of the complex value represents the absolute value of the speed (m/s); and the direction of the complex value represents the mobility direction. For each slot, changes in the speed and its direction of each radio are randomly generated based on the average speed and acceleration of each radio. As a result, each radio will have a new position in the 2-D plan for every TDMA slot. The new positions are then used in the physical channel model to calculate the received signal strength at each tactical radio from all potential transmitters. 
+
+Due to tactical radio mobility, the channel and the path loss between any pair of transmitters changes slot by slot.  In Phase I simulation, we assume that the platoon is patrolling in an urban area. We use a complex value (in other words, a 2-dimensional vector) to represent node speed, in which the L2 norm of the complex value represents the absolute value of the speed (m/s); and the direction of the complex value represents the mobility direction. For each slot, changes in the speed and its direction of each radio are randomly generated based on the average speed and acceleration of each radio. As a result, each radio will have a new position in the 2-D plan for every TDMA slot. The new positions are then used in the physical channel model to calculate the received signal strength at each tactical radio from all potential transmitters. 
 
 The mobility traces not only can be randomly generated from the Matlab simulator, but also can be incorporated from real operation collections as well as Google Earth KML files. This feature enable us to evaluate the SOIA system performance in a realistic tactical maneuver.
 
@@ -278,6 +284,33 @@ To the end, at the protocol level, a training signal has to included during the 
 \section{PHASE I WORK PLAN}
 
 \section{RELATED WORK}
+
+Since the introduction, interference alignment has attracted the attention of many researchers from around the world. Numerous research papers have been published, from which we can draw insights into this technology. However, many of these papers focus on the theoretic study of interference alignment scheme and capacity gain in high SNR range, and assume that the clustering of transceiver pairs are given a prior. Applying IA into practical communication system is still an challenging issue.
+
+Several recent papers investigated the issue of applying IA in cellular network [][]. Note that reference [] is published by Professor Bhaskar Rao, who is consultant of C-3 Comm Systems on this proposal. Applying IA in cellular networks is relatively convenient since cellular systems have centralized control plane and high-speed wired network connecting base stations. Therefore, cellular systems are able to aggregate the channel knowledge of all users for optimum user clustering and computing IA solution. The same cannot be said for tactical mobile ad hoc networks. In general, TMACN doesn't have a centralized control plane. Furthermore, TMACN usually operates in low to moderate SNR range. Interference alignment has to be considered jointly with SNR enhancement. Therefore, applying IA to TMACN network is very challenging. In addition, prototyping IA schemes in tactical software defined radio platforms with MIMO capability further increase the difficulty of this SBIR topic.
+
+The PI at C-3 Comm Systems brings a combined expertise on the operation of tactical networks and software defined radio system prototyping. These combined experience position C-3 Comm Systems as a strong contender to fulfill the requirements of this SBIR topic and deliver to Army a working demonstration of TMACN operating with interference alignment.
+
+\begin{table}
+\caption{default}
+\begin{center}
+\begin{tabular}{|>{\arraybackslash}p{\textwidth}|}
+\hline
+\rowcolor{c1}{
+\begin{tabular}{@{}l@{}}
+\color{white}{\textbf{Project: Content-Based Mobile Edge Networking (CBMEN)}}\\ 
+\color{white}{\textbf{Sponsor: DARPA}}\\ 
+\end{tabular}}\\
+\hline
+\rowcolor{c2} {\textbf{Project Summary:}} Dr. Cao (C-3 Comm Systems) was a senior personnel on the USC/ISI mobile system integrators (MSI) team for the CBMEN program, which developed algorithms for content storage, distribution, and access at the tactical edge by small unit warfighters.  Dr. Cao led USC/ISI's effort to establish an EMANE-based networking emulation lab with multiple high-end Linux servers and more than 150 Android phones. Furthermore, Dr. Cao planned and executed a month long large-scale field test and demonstration event for the Phase I CBMEN program at Ft. A. P. Hill. In this event, USC/ISI designed and deployed a platoon size heterogeneous MANET network over a 2 kilometers long hilly range, using both Rifleman radios and commercial-off-the-shelf (COTS) Android phones. \\
+\hline
+{\textbf{Relevance to SOIA:}} \\
+\hline\hline
+\end{tabular}
+\end{center}
+\label{default}
+\end{table}%
+ 
 
 \section{RELATIONSHIP WITH FUTURE RESEARCH OR RESEARCH AND DEVELOPMENT}
 
@@ -295,15 +328,28 @@ Dr. Cao's technical expertise spans across wireless communications and networkin
 \subsubsection{Relevant Publications}
 Dr. Cao's publications that are relevant to subspace-based signal processing for MIMO and OFDMA systems are listed in the following.
 \begin{enumerate}[topsep=0pt,itemsep=-1ex,partopsep=1ex,parsep=1ex]
-\item Z. Cao, U. Tureli and Y.D. Yao, ``Low-complexity orthogonal spectral signal construction for generalized OFDMA uplink with frequency synchronization errors," in IEEE Transactions on Vehicular Technology, vol.56, no. 3, pp.1143-1154, May 2007.\item D. Radovic, Z. Cao and M. Eric, ``Performance Analysis of the Multi-User Interleaved OFDMA Uplink Receiver in the presence of Carrier Frequency Offsets", in Proceedings of the 9th International Symposium on Wireless Personal Multimedia Communications, September 2006.\item P. Honan, Z. Cao and T. Tureli, ``Adaptive Reduced-Rank MIMO Decoder for Military Communications", in Proceedings of the 2006 IEEE Military Communications Conference (MILCOM 2006), October 2006.\item	D. Radovic, Z. Cao and M. Eric, ``Effects of Uplink Channel on Multi-User Interleaved OFDMA Synchronization Receiver Performance", in Proceedings of the 11th International OFDM Workshop, August 2006.\item	P. Honan, Z. Cao and T. Tureli, ``Adaptive Reduced-Rank Interference Suppression for MIMO Decoding," in Proceedings of International Conference on Digital Telecommunications (ICDT'06), August 2006.
-\item Z. Cao, U. Tureli and Y. D. Yao, ``Frequency synchronization for generalized OFDMA uplink," in Proceedings of IEEE Global Telecommunication Conference (Globecom?04), vol.2, pp.1071-1075, December 2004. \item	Z. Cao, U. Tureli and Y. D. Yao, ``Deterministic multiuser carrier frequency offset estimation for interleaved OFDMA uplink," in IEEE Transactions on Communications, vol. 52, no. 9, pp.1585-1594, September 2004.\item Z. Cao, U. Tureli, Y. D. Yao and P. Liu, ``Optimum Subcarrier Assignment for OFDAM Uplink," in Proceedings of the 37th IEEE Asilomar Conference on Signals, Systems and Computers, vol.1, pp.708-712, November 2003.\item	Z. Cao, U. Tureli and Y. D. Yao, ``Efficient Structure-based Carrier Frequency Offset Estimation for Interleaved OFDMA Uplink," in Proceedings of IEEE International Conference on Communications (ICC'03), vol.5, pp.3361 - 3365, May 2003.
+\item Z. Cao, U. Tureli and Y.D. Yao, ``Low-complexity orthogonal spectral signal construction for generalized OFDMA uplink with frequency synchronization errors," in IEEE Transactions on Vehicular Technology, vol.56, no. 3, pp.1143-1154, May 2007.
+\item D. Radovic, Z. Cao and M. Eric, ``Performance Analysis of the Multi-User Interleaved OFDMA Uplink Receiver in the presence of Carrier Frequency Offsets", in Proceedings of the 9th International Symposium on Wireless Personal Multimedia Communications, September 2006.
+\item P. Honan, Z. Cao and T. Tureli, ``Adaptive Reduced-Rank MIMO Decoder for Military Communications", in Proceedings of the 2006 IEEE Military Communications Conference (MILCOM 2006), October 2006.
+\item	D. Radovic, Z. Cao and M. Eric, ``Effects of Uplink Channel on Multi-User Interleaved OFDMA Synchronization Receiver Performance", in Proceedings of the 11th International OFDM Workshop, August 2006.
+\item	P. Honan, Z. Cao and T. Tureli, ``Adaptive Reduced-Rank Interference Suppression for MIMO Decoding," in Proceedings of International Conference on Digital Telecommunications (ICDT'06), August 2006.
+\item Z. Cao, U. Tureli and Y. D. Yao, ``Frequency synchronization for generalized OFDMA uplink," in Proceedings of IEEE Global Telecommunication Conference (Globecom?04), vol.2, pp.1071-1075, December 2004. 
+\item	Z. Cao, U. Tureli and Y. D. Yao, ``Deterministic multiuser carrier frequency offset estimation for interleaved OFDMA uplink," in IEEE Transactions on Communications, vol. 52, no. 9, pp.1585-1594, September 2004.
+\item Z. Cao, U. Tureli, Y. D. Yao and P. Liu, ``Optimum Subcarrier Assignment for OFDAM Uplink," in Proceedings of the 37th IEEE Asilomar Conference on Signals, Systems and Computers, vol.1, pp.708-712, November 2003.
+\item	Z. Cao, U. Tureli and Y. D. Yao, ``Efficient Structure-based Carrier Frequency Offset Estimation for Interleaved OFDMA Uplink," in Proceedings of IEEE International Conference on Communications (ICC'03), vol.5, pp.3361 - 3365, May 2003.
 \end{enumerate}
 
 \noindent{Dr. Cao's publications that are relevant to {\bf{wireless system prototyping}}, {\bf{software defined radio methodology}} and {\bf{demonstrations of innovative wireless system concepts}} are listed in the following.}
 \begin{enumerate}[topsep=0pt,itemsep=-1ex,partopsep=1ex,parsep=1ex]
 \item Z. Cao and et. al., ``Content-Oriented Mobile Edge Technology System Integration Framework and Field Evaluation," in Proceedings of IEEE MILCOM 2014, Oct. 6-8, 2014.
-\item Z. Cao, J. Cuenco, A. Nwokafor, P. Johansson, B. Hodgkiss, ``Development of low-cost public safety P25 waveform in an OSSIE environment with USRP," in Proceedings of the 2011 Wireless Innovation Conference (SDR'11), December 2011.\item Z. Cao, B. Hodgkiss, P. Johansson, W. Zhao, A. Nwokafor, J. Cuenco, E. Salgado, and B. Hobson, ``Design and rapid prototyping of SCA-compliant public safety P25 waveform and P25-FM3TR-VoIP bridge," in the Springer Journal of Analog Integrated Circuits and Signal Pro-cessing, vol. 69, issue 2 (2011), Page 245-257. \item Z. Cao, B. Hodgkiss, P. Johansson, W. Zhao, A. Nwokafor, J. Cuenco, E. Salgado, and B. Hobson, ``SCA-Compliant Public Safety P25-FM3TR-VOIP Bridge," in Proceedings of the 2010 Wire-less Innovation Conference (SDR'10), December 2010.\item Z. Cao, B. Hodgkiss, P. Johansson, W. Zhao, A. Nwokafor, J. Cuenco, E. Salgado, and B. Hobson, ``Rapid Development of a P25 JTRS Waveform," in Proceedings of the 2010 IEEE Military Communications Conference (MILCOM 2010), November 2010.
-\item	P. Johansson, Z. Cao and B. Hodgkiss, ``Rapid Porting of SCA-compliant FM3TRWaveform," in Proceedings of the 2009 SDR Forum Technical Conference (SDR'09), December 2009.\item Z. Cao and J. Ng, ``PaSiVe: A Design Workflow for Fast Prototyping Innovative Signal Processing Applications on FPGA", 2009 NASA Military and Aerospace Programmable Logic Devices Conference (MAPLD 2009), September 2009.\item Z. Cao, et. al., ``System Level Design Methodology for Wireless MIMO Prototyping," in Proceedings of 2006 IEEE Radio and Wireless Symposium, pp.67 - 70, January 2006.\end{enumerate}
+\item Z. Cao, J. Cuenco, A. Nwokafor, P. Johansson, B. Hodgkiss, ``Development of low-cost public safety P25 waveform in an OSSIE environment with USRP," in Proceedings of the 2011 Wireless Innovation Conference (SDR'11), December 2011.
+\item Z. Cao, B. Hodgkiss, P. Johansson, W. Zhao, A. Nwokafor, J. Cuenco, E. Salgado, and B. Hobson, ``Design and rapid prototyping of SCA-compliant public safety P25 waveform and P25-FM3TR-VoIP bridge," in the Springer Journal of Analog Integrated Circuits and Signal Pro-cessing, vol. 69, issue 2 (2011), Page 245-257. 
+\item Z. Cao, B. Hodgkiss, P. Johansson, W. Zhao, A. Nwokafor, J. Cuenco, E. Salgado, and B. Hobson, ``SCA-Compliant Public Safety P25-FM3TR-VOIP Bridge," in Proceedings of the 2010 Wire-less Innovation Conference (SDR'10), December 2010.
+\item Z. Cao, B. Hodgkiss, P. Johansson, W. Zhao, A. Nwokafor, J. Cuenco, E. Salgado, and B. Hobson, ``Rapid Development of a P25 JTRS Waveform," in Proceedings of the 2010 IEEE Military Communications Conference (MILCOM 2010), November 2010.
+\item	P. Johansson, Z. Cao and B. Hodgkiss, ``Rapid Porting of SCA-compliant FM3TRWaveform," in Proceedings of the 2009 SDR Forum Technical Conference (SDR'09), December 2009.
+\item Z. Cao and J. Ng, ``PaSiVe: A Design Workflow for Fast Prototyping Innovative Signal Processing Applications on FPGA", 2009 NASA Military and Aerospace Programmable Logic Devices Conference (MAPLD 2009), September 2009.
+\item Z. Cao, et. al., ``System Level Design Methodology for Wireless MIMO Prototyping," in Proceedings of 2006 IEEE Radio and Wireless Symposium, pp.67 - 70, January 2006.
+\end{enumerate}
 	
 \subsection{Chief Engineer --- Matthew M. Calderon}
 
