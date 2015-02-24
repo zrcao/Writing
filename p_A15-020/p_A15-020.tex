@@ -1,5 +1,7 @@
 \documentclass[letterpaper,11pt]{article}
-\usepackage[textwidth=6.5in,textheight=8.5in]{geometry}
+%\usepackage[textwidth=6.5in,textheight=8.5in]{geometry}
+\usepackage[margin=1.0in]{geometry}
+\setlength{\headheight}{28pt}
 \usepackage{graphicx}
 \usepackage{fancyhdr}
 \usepackage{array}
@@ -21,8 +23,10 @@
 \titlespacing{\section}{0pt}{*1}{*1}
 \titlespacing{\subsection}{0pt}{*1}{*1}
 \titlespacing{\subsubsection}{0pt}{*1}{*1}
+% For including PDF pages
+\usepackage{pdfpages}
 
-%\setlength{\topskip}{0pt}
+%\setlength{\topskip}{20pt}
 %\hoffset=-0.74in
 %\voffset= -0.8in
 %\textwidth=6.5in
@@ -35,7 +39,7 @@
 \lhead{\includegraphics[width=0.25\textwidth]{../figures/C-3logo.png}}
 \chead{Proposal Number\\A151-020-0273}
 \rhead{Topic Number\\A15-020}
-\cfoot{\textcopyright~C-3 Comm Systems LLC. Proprietary. All Rights Reserved.}
+\cfoot{\textcopyright~C-3 Comm Systems LLC. Proprietary.}
 \rfoot{\thepage}
 
 \pagestyle{fancy}
@@ -46,7 +50,7 @@
 
 \begin{document}
 
-%\thispagestyle{fancy}
+\thispagestyle{fancy}
 
 %\maketitle
 
@@ -71,36 +75,35 @@
 %
 %\setcounter{page}{1}
 
-~~~
 
 \section{IDENTIFICATION \& SIGNIFICANCE OF THE OPPORTUNITY}
 
 \subsection{Problem Identification}
-Epitomized by recent military operations, modern warfare is conducted by small units at tactical edges. The 2012 new strategic guidance for Department of Defense articulates that one of the primary missions of the U.S. Armed forces is to project power despite anti-access/area denial (A2AD) challenges~\cite{DoD:strategy2012}, including implementing the Joint Operational Access Concept~\cite{DoD:JOAC}, which suggests ``smaller units and platforms that are rapidly deployable yet lethal." For warfighters in small units at tactical edges, efficiently sharing real-time situational awareness information is critical to their mission success. To this end, the tactical Mobile Ad hoc Communications Network (TMACN) is important because it will provide the backbone for exchange and sharing of information from sensors, manned and unmanned vehicles and systems, and dismounted soldiers. Improving the network capacity for TMACN has a direct impact on warfighter's mission success . 
+Epitomized by recent military operations, modern warfare is conducted by small units at tactical edges. The 2012 new strategic guidance for Department of Defense articulates that one of the primary missions of the U.S. Armed forces is to project power despite anti-access/area denial (A2AD) challenges~\cite{DoD:strategy2012}, including implementing the Joint Operational Access Concept~\cite{DoD:JOAC}, which suggests ``smaller units and platforms that are rapidly deployable yet lethal." For warfighters in small units at tactical edges, efficiently sharing real-time situational awareness information is critical to their mission success. To this end, the tactical Mobile Ad hoc Communications Network (TMACN) is an important defense infrastructure providing the backbone for exchange and sharing of information from sensors, manned and unmanned vehicles and systems, and dismounted soldiers. Improving the network capacity for TMACN has a direct impact on warfighter's mission success . 
 
 %Some of the unique features that distinguish TMACNs from traditional wireless networks are their mobility; they must be self contained and have the ability to move to support forces as engagements change, their adaptability; they must be able to reconfigure themselves in real-time as new nodes are added and others are lost, and their size; they may be on the order of hundreds or even thousands of nodes. The uniqueness associated with TMACNs gives rise to several complexities that limits a satisfactory solution for performance prediction; theories required to predict their performance have yet to be developed, and adequate hardware to test them is still years away. The focus of this effort is to develop a performance prediction solution for TMACNs based on simulation.
 
-Wireless networks are interference limited due to the fact that multiple users need to share the transmission resources. Traditionally, time and frequency resources in wireless networks are divided into orthogonal units and assigned to different users, such as TDMA, FDMA and OFDMA. Each resource unit can only be used by a single transmission in order to avoid interference among multiple simultaneous transmissions. For large networks, resource reuse is widely adopted in both commercial and military systems to increase the network capacity. The same frequency/time resource unit is shared by multiple transceiver pairs that are far apart geographically such that mutual interference is not significant due to path loss. 
+TMACN are interference-limited due to the fact that multiple closely located radio assets need to share the transmission resources. Traditionally, time and frequency resources in wireless networks are divided into orthogonal units and assigned to different users, such as TDMA, FDMA and OFDMA. Each resource unit can only be used by a single transmission in order to avoid interference among multiple simultaneous transmissions. For large networks, resource reuse is widely adopted in both commercial and military systems to increase the network capacity. The same frequency and/or time resource unit is shared by multiple transceiver pairs that are far apart geographically such that mutual interference is not significant due to path loss. 
 
-In addition to the frequency and the time signaling dimensions, multiple antenna arrays and MIMO systems enable the vector space as a third signaling dimension, i.e. the spatial dimension. The spatial dimension can be shared among multiple transmissions or multiple data streams of the same transceiver pair. The same time and frequency resource unit can be shared among multiple transmissions as long as they can be separated in the spatial dimension. In the ideal case, each transmission occupies a subspace that is orthogonal to the subspaces of all other parallel transmissions. In reality, due to correlations among antennas, the channel matrix may be rank-deficient thus limits the number of simultaneous transmissions that can be supported. To some extend, spread spectrum technology can also be viewed as using vector-based signaling to support multiuser communications. 
+In addition to the frequency and the time signaling dimensions, multiple antenna arrays and MIMO systems enable the vector space as a third signaling dimension, i.e. the spatial dimension. The spatial dimension can be shared among multiple transmissions or multiple data streams of the same transceiver pair. Therefore, the same time and frequency resource unit can be shared among multiple transmissions as long as they can be separated in the spatial dimension. In the ideal case, each transmission occupies a subspace that is orthogonal to the subspaces of all other parallel transmissions. In reality, due to the correlations among antennas and limited channel diversity, the channel matrix may be rank-deficient thus limits the number of simultaneous transmissions that can be supported. To some extent, spread spectrum technology can also be viewed as using vector-based signaling to support multiuser communications. 
 
-All aforementioned approaches are built upon the basic doctrine that, in order to avoid interference, closely located transceiver pairs in a wireless network must use orthogonal transmission resource units for simultaneous transmissions. Each resource unit can only be used by a single transmission. Therefore, the number of simultaneous transmissions are upper bounded by the number of orthogonal resource units available to use. Given the limited bandwidth each radio can access and the limited number of antennas each radio is equipped per size, weight and power (SWaP) requirements, the capacity of tactical mobile networks is thus constrained during operational deployment. 
+All aforementioned approaches are built upon the basic doctrine that, in order to avoid interference, closely located transceiver pairs in a wireless network must use orthogonal resource units for simultaneous transmissions. Each resource unit can only be used by a single transmission. Therefore, the number of transmissions at the same time are upper bounded by the number of orthogonal resource units. Given the limited bandwidth each radio can access, and the limited number of antennas each radio is equipped with due to the size, weight and power (SWaP) requirements, the capacity of tactical mobile networks is thus constrained during operational deployment. 
 
 In order to further enhance the capacity of tactical networks, we need to develop fundamentally new technology that can be deployed in realistic mission operations. 
 
-\subsection{Interference Alignment -- The Opportunity for More Wireless Network Capacity}
+\subsection{Interference Alignment -- The Opportunity for Higher TMACN Throughput}
 
-Interference alignment (IA) is an emerging approach, which breaks away from the above fundamental doctrine, i.e., the number of simultaneous transmissions among closely located radio transceivers is limited by the number of orthogonal transmission resource units.  
+Interference alignment (IA)~\cite{4567589} is an emerging approach, which breaks away from the above fundamental doctrine, i.e., the number of simultaneous transmissions among closely located radio transceivers is limited by the number of orthogonal resource units.  
 
- In interference alignment, the signaling of multiple closely located transceiver pairs are jointly designed, such that at each individual receiver all interference aligned into a subspace that is orthogonal to the desired signal. The number of interferences is more than the rank of the aligned subspace. Using interference alignment, from the network point of view, the number of simultaneous transmissions within the interference range can be more than the number of available orthogonal resource units. Thus, the overall network throughput is increased.
+In interference alignment, the signaling of multiple closely located transceiver pairs are jointly designed, such that at each individual receiver all interference are aligned into a subspace that is orthogonal to the desired signal. The number of interferences is more than the rank of the aligned subspace. Using interference alignment, from the network point of view, the number of simultaneous transmissions within the interference range can be more than the number of available orthogonal resource units. Thus, the overall network throughput is increased. 
 
-At least in theory, shows it can significantly improve the network capacity. The theoretic concept of interference has been extensively explained in many academia publications. The theoretic framework for IA has several idealistic assumptions that need to be addressed before apply IA in practical systems. First, since IA jointly design the transmission signals for multiple transmitters, the channel state information (CSI) is central to calculating IA beamforming vectors. As a result, IA incurs significant overhead for CSI estimations and feedback. In mobile fast-fading environment, the overhead of CSI acquisition can limit or cancel out the gains of IA. 
+IA usually finds its uses in $K$-user interference channels and X-channels. Theoretic investigation has proven that IA can significantly improve the network capacity. For a $K$-user interference channels with varying channel gains, the IA scheme in~\cite{4567443} can achieve the total degree of freedom, which is $K/2$.
 
 \subsection{Practical Challenges and Requirements}
 
-Theoretical investigation shows that a $K$-pair interference channel with IA can achieve its total DOF, which is $K/2$ [\#].  In practice, several challenges have to be addressed before materializing the capacity gain promised by IA in an operational TMACN.
+The theoretic framework for IA has several idealistic assumptions that need to be addressed before apply IA in practical systems. The channel state information (CSI) is central to calculating IA precoders and equalizers. IA schemes usually require joint design of the transmission signals for multiple transmitters, as a result, IA schemes incur significant overhead for CSI information sharing. In a fast-fading mobile environment, the overhead of CSI acquisition can limit or cancel out the gains of IA. In addition, several practical challenges have to be addressed before materializing the throughput gain promised by IA in an operational TMACN.
 
-{\textbf{\textit{Clustering transceiver pairs}}} --- IA requires coordination among multiple transceiver pairs to design the signals and setup the joint transmissions in the physical layer. So the first step in applying IA is to cluster transceiver pairs instead of individual nodes, as in the traditional mobile ad hoc network (MANET) clustering problem  [\#]. Even given the same group of radios, if the pairing of transceivers changes, the IA signaling of this group has to be re-designed. Most research papers discussing IA assume that the $K$ pairs are given {\it{a prior}}. This assumption is reasonable for a cellular system, where a centralized control plane manages multiple base stations and also has the full knowledge of all traffic. The knowledge of current traffic needs is necessary to determine the participating transceiver pairs within a cluster. TMACN, on the contrary, doesn't have a centralized control plane. Each radio in TMACN knows only its own traffic needs. There is no entity in a TMACN which has global knowledge of all traffic needs. In short, distributed pairing of radios with active traffic need is the first challenge to be addressed.
+{\textbf{\textit{Clustering transceiver pairs}}} --- IA requires coordination among multiple transceiver pairs to design the signals and setup the joint transmissions in the physical layer. So the first step in applying IA is to cluster transceiver pairs instead of individual nodes. This is different from the clustering problem in the traditional mobile ad hoc network (MANET). Even given the same group of radios, if the pairing of transceivers changes, the IA signaling of this group has to be re-designed. Most research papers discussing IA assume that the $K$ pairs are given {\it{a prior}}. This assumption is reasonable for a cellular system, where a centralized control plane manages multiple base stations and also has the full knowledge of all traffic. The knowledge of current traffic needs is necessary to determine the participating transceiver pairs within a cluster. TMACN, on the contrary, doesn't have a centralized control plane. Each radio in TMACN knows only its own traffic needs. There is no entity in a TMACN which has global knowledge of all traffic needs. In short, distributed pairing of radios with active traffic need is the first challenge to be addressed.
 
 {\textbf{\textit{Handling heterogeneous radios}}} ---  Tactical networks are inherently heterogeneous. Dismounted soldier radios and vehicle mounted radio transceivers have different SWaP requirements. Hence, different radios are equipped with various numbers of antennas. For example, the AN/PRC-154 Rifleman Radio that is being fielded now to combat troops is a single transceiver radio. The AN/PRC-155 Manpack radio has two radio channels. More antennas may be available on vehicular-mounted radios, for example AN/PRC-117G. Given the dynamic nature of battlefield communications, the IA solution computing must take into account the fact that, within an IA cluster, some radios have reduced signal dimensionality than the others. This indicates that each radio must share its antenna configuration with neighboring nodes to facilitate transceiver pair clustering and IA solution generation. 
 
@@ -134,7 +137,7 @@ The overall PHASE I technical objective is to investigate, design and evaluate a
 
 \subsection{Research and Develop the Self-organizing Interference Alignment (SOIA) Technology}
 
-Interference alignment leverages the fact that interference signals, unlike noise, have inherent structures as they are generated by other radio transmitters to carry information. If multiple interfering signals at a receiver are all structured to match a subspace that is orthogonal to the subspace of the desired signal(s) of the receiver, these interfering signals are aligned without deteriorating the reception of the desired signal. IA usually finds its uses in $K$-user interference channel and X-channels. 
+Interference alignment leverages the fact that interference signals, unlike noise, have inherent structures as they are generated by other radio transmitters to carry information. If multiple interfering signals at a receiver are all structured to match a subspace that is orthogonal to the subspace of the desired signal(s) of the receiver, these interfering signals are aligned without deteriorating the reception of the desired signal.  
 
 {\textbf{Enabling distributed clustering.}} The typical application scenario for IA in TMACN is the $K$-user interference channels. Most algorithms for computing IA precoders and equalizers assume that the clustering of transceiver pairs are given a prior. An IA cluster is determined by the set of participating nodes,  the pairing among these nodes, and the traffic directions for each pair of nodes. Centralized clustering in a network with a centralized control plane, such as cellular networks, is relatively straightforward. However, TMACN doesn't have a centralized control plane. Therefore, an IA cluster in TMACN has to be formed in a distributed way. Enabling distributed clustering is the first objective of this proposed Phase I effort to research and develop an self-organizing interference alignment (SOIA) scheme.
 
@@ -175,6 +178,8 @@ During Phase I and Phase I option period, we will develop a detailed Phase II pr
 \section{PHASE I WORK PLAN}
 
 \subsection{Task 1: Research and Develop Self-organizing Interference Alignment (SOIA) }
+
+Task 1 is the leading tasking during the Phase I. It is expected that Task 1 will lead to a set of procedures each TMACN node operates during deployment to form IA clusters dynamically for simultaneous transmissions. In the following, the SOIA technical approach we proposed for Phase I effort are discussed. The approach includes three main components. First, identifying the leading transceiver pair of an IA cluster to be formed. Second, aligning interference at the head pair receiver and designing precoder for the transmitter. Third, selecting cluster member pairs and computing equalizers.
 
 \subsubsection{Cluster Head Pair Identification}\label{ClusterHead}
 
@@ -237,14 +242,14 @@ For any node $k$, $k\neq j$ and $k\neq l$, $\mathbf{P}^{[k]}_{j,l}$ can be estim
 \begin{equation}\label{equ:estimate_interference_signature}
 \hat{\mathbf{P}}^{[k]}_{j,l} = \mathbf{Y}_{k,l}\mathbf{X}_l^{-1}=\left(\mathbf{H}_{k,l}\mathbf{B}_{j,l}\mathbf{X}_l+\mathbf{N}_k\right)\mathbf{X}_l^{-1}=\mathbf{H}_{k,l}\mathbf{B}_{j,l}+\mathbf{N}_k\mathbf{X}^{-1}_l.
 \end{equation}
-In Eq.~(\ref{equ:estimate_interference_signature}),  $\mathbf{X}_l$ is a training structure used known to all nodes. $\mathbf{Y}_{k,l}$ is the training signal received by node $k$ from node $l$. In Section~\ref{sec:frame_and_protocol}, the IA subframe structure is introduced, where a dedicated interference training period is inserted. During this interference training period, only node $l$ transmits. Therefore, each node in $l$'s neighbor can estimate the interference subspace signature it sees from the transmission from $l$ to $j$. It is worthwhile to point out several useful features of the definition for interference subspace signature in Equ.~(\ref{equ:estimate_interference_signature}).
+In Eq.~(\ref{equ:estimate_interference_signature}),  $\mathbf{X}_l$ is a training structure used known to all nodes. $\mathbf{Y}_{k,l}$ is the training signal received by node $k$ from node $l$. In Task 2, the IA subframe structure is introduced, where a dedicated interference training period is inserted. During this interference training period, only node $l$ transmits. Therefore, each node in $l$'s neighbor can estimate the interference subspace signature it sees from the transmission from $l$ to $j$. It is worthwhile to point out several useful features of the definition for interference subspace signature in Equ.~(\ref{equ:estimate_interference_signature}).
 \begin{itemize}[noitemsep,nolistsep]
 \item Interference power has been implicitly incorporated in the definition of $\hat{\mathbf{P}}^{[k]}_{j,l}$, if we assume the symbol column energy in $\mathbf{X}$ is fixed to unit. 
-\item The training symbol matrix $\mathbf{X}_l$ is an $S_j$ by $S_j$ square matrix. For IA operations, $S_j<n_j$, where $n_j$ is the number of antennas on node $j$. In practical TMACN operations, the number antennas on each radio is limited. Thus, a limited set of training symbol matrices can be pre-installed onto each radio. Node $l$ broadcasts $S_j$ to all its neighbors such that node $k$ is able to select the correct training symbol matrix to estimate $\hat{\mathbf{P}}^{[k]}_{j,l}$. Section~\ref{sec:frame_and_protocol} provides details on the protocol frame structure in which $S_j$ is included in the header information.
+\item The training symbol matrix $\mathbf{X}_l$ is an $S_j$ by $S_j$ square matrix. For IA operations, $S_j<n_j$, where $n_j$ is the number of antennas on node $j$. In practical TMACN operations, the number antennas on each radio is limited. Thus, a limited set of training symbol matrices can be pre-installed onto each radio. Node $l$ broadcasts $S_j$ to all its neighbors such that node $k$ is able to select the correct training symbol matrix to estimate $\hat{\mathbf{P}}^{[k]}_{j,l}$. Task 2 defines details on the protocol frame structure in which $S_j$ is included in the header information.
 \item More importantly, Equ.~(\ref{equ:estimate_interference_signature}) supports heterogenous antenna configurations among different nodes. This is particularly useful for TMACN operations with heterogeneous radio nodes. The matrix  $\hat{\mathbf{P}}^{[k]}_{j,l}$ has $n_k$ rows and $S_j$ columns. $n_k$ is the number of antennas on node $k$. The number of antennas on node $l$ is irrelevant since $n_l$ is absorbed by the inner product of $\mathbf{H}_{k,l}$ and $\mathbf{B}_{j,l}$. Therefore, regardless of the number of antennas on nodes of the interference source, all interference subspace signature at a node has the same number of rows. 
 \end{itemize}
 
-Using the sub frame structure introduced in Section~\ref{sec:frame_and_protocol}, the receiving node of the cluster head pair, node $r$, is able to keep track of $\hat{\mathbf{P}}^{[r]}_{j,l}$ for all potential transceiver pairs $\mathcal{U}$ among its neighbors. As we indicated in Section~\ref{LocalIA}, $r$ has to be aware of the precoder matrix $\mathbf{B}_{rt}$ for its own transmitter node $t$ and the channel $\mathbf{H}_{rt}$ between node $t$ and node $r$. Both can be obtained locally by node $r$. Thus, node $r$ is able to locally compute the signal subspace from node $t$ as $\mathbf{S}_{rt}=\mathbf{H}_{rt}\mathbf{B}_{rt}$. In addition, node $r$ is able to calculate the projection of the interference subspace of all potential transceiver pairs in $\mathcal{U}$ onto the signal subspace $\mathbf{S}_{rt}$. For the pair $u\colon=\{l\rightarrow j\}$, its projected interference energy over $\mathbf{S}_{rt}$ is given by the norm of the projection in the following equation.
+Using the sub frame structure defined in Task 2, the receiving node of the cluster head pair, node $r$, is able to keep track of $\hat{\mathbf{P}}^{[r]}_{j,l}$ for all potential transceiver pairs $\mathcal{U}$ among its neighbors. As we indicated in Section~\ref{LocalIA}, $r$ has to be aware of the precoder matrix $\mathbf{B}_{rt}$ for its own transmitter node $t$ and the channel $\mathbf{H}_{rt}$ between node $t$ and node $r$. Both can be obtained locally by node $r$. Thus, node $r$ is able to locally compute the signal subspace from node $t$ as $\mathbf{S}_{rt}=\mathbf{H}_{rt}\mathbf{B}_{rt}$. In addition, node $r$ is able to calculate the projection of the interference subspace of all potential transceiver pairs in $\mathcal{U}$ onto the signal subspace $\mathbf{S}_{rt}$. For the pair $u\colon=\{l\rightarrow j\}$, its projected interference energy over $\mathbf{S}_{rt}$ is given by the norm of the projection in the following equation.
 \begin{equation}\label{projection}
 A^{u}_{rt}=\left\Arrowvert\left(\mathbf{P}^{[r]}_{l,j}\right)^{*}\mathbf{S}_{rt}\right\Arrowvert_{2}~\textrm{for~any~}u\in\mathcal{U}.
 \end{equation}
@@ -275,7 +280,7 @@ To minimize the interference power, the equalizer node $j$ uses for the IA clust
 
 \noindent{\textbf{Cascaded selection}}
 
-Cascaded selection is the second approach that we plan to investigate during the phase I effort for cluster member selection. Similar to the centralized selection, in cascaded selection the receiver node of the cluster head pair $r$ first determines the set $\tilde{\mathbf{U}}$ according to Eq.~(\ref{tilde_U}). Different from the centralized approach, rather than selecting all pairs in $\tilde{\mathcal{U}}$ as members of the cluster, node $r$ chooses only one pair of nodes from $\tilde{\mathcal{U}}$ with the least interference energy projection. In other words, node $r$ selects pairs $u$ as the second member of the IA cluster according to
+Cascaded selection is the second approach that we plan to investigate during the phase I effort for cluster member selection. Similar to the centralized selection, in cascaded selection the receiver node of the cluster head pair $r$ first determines the set $\tilde{\mathcal{U}}$ according to Eq.~(\ref{tilde_U}). Different from the centralized approach, rather than selecting all pairs in $\tilde{\mathcal{U}}$ as members of the cluster, node $r$ chooses only one pair of nodes from $\tilde{\mathcal{U}}$ with the least interference energy projection. In other words, node $r$ selects pairs $u$ as the second member of the IA cluster according to
 $$
 \min_{u\in{\tilde{\mathcal{U}}}}A^{u}_{rt}.
 $$
@@ -289,33 +294,37 @@ The SOIA approach is designed to materialize the capacity gain of interference a
 
 \subsection{Task 2: Evaluate System Performance and Feasibility for Phase II}
 
-During the Phase I effort, we plan to model the SOIA approach in MATLAB and develop MATLAB-based simulator to evaluate the SOIA system performance. The SOIA team recognizes that it is extremely important to have a high fidelity physical layer propagation model in order to evaluate the SOIA system performance. Many networking simulation tools, such as Qualnet and OpNet, have naïve physical layer models. The SOIA team has extensive experience in realistic MIMO channel modeling and in using Ericsson's RUNE (Rudimentary Network Emulator)~\cite{ZandRRM:book:2001}, a MATLAB-based TDMA wireless networking simulation tool available to public. We will incorporate many features of RUNE into the SOIA performance simulation.
+During Phase I, we plan to implement the SOIA technology in Matlab and develop an Matlab-based simulator to evaluate the SOIA system performance. We recognize that it is extremely important to have a propagation model with high-fidelity in order to evaluate the system performance of the SOIA technology. The issue of a good multiuser propagation model has long been the challenge for many networking simulation tools, such as Qualnet and OpNet. The PI has extensive experience in realistic MIMO channel modeling using Ericsson's RUNE (Rudimentary Network Emulator)~\cite{ZandRRM:book:2001}, a MATLAB-based TDMA wireless networking simulation tool available to public. We will incorporate many features of RUNE into the SOIA simulator.
 
 \subsubsection{Spatial Channel Models for MANET}
 
 Accurate physical layer MIMO channel modeling is critical for simulation based TMACN evaluation. During Phase I effort, we will adopt and adapt the industry standard MIMO spatial channel model, the 3GPP spatial channel model (SCM) for MIMO simulations~\cite{3GPP:SCM}.  The SOIA team has prior experience implementing 3GPP SCM in MATLAB under the Ericsson RUNE framework. 
 
-The 3GPP SCM was developed for cellular network simulation. However, by lowering the antenna height, we could easily convert it into system level simulation for mobile ad hoc networks. For a given laydown of $N$ radio nodes, the planned simulator will generate a $N-1$ by $N-1$ path gain matrix between all possible transceiver pairs. The fast fading MIMO coefficients will be generated according to the 3GPP SCM. The path gain between any pair of radios is the sum of the distance-based path loss and the lognormal shadowing. For the distance based path loss, similar to the 3GPP Spatial Channel Model~\cite{3GPP:SCM}, we will use the COST 231 Walfish-Ikegami NLOS and LOS models. The lognormal shadowing for the NLOS has a standard deviation of 10dB, and that for LOS is 4dB, as given in~\cite{3GPP:SCM}. Furthermore, for the same transmitter, two closely located receivers have correlated lognormal shadowing. We use a pre-generated correlated lognormal map, from which each tactical receiver?s lognormal shadowing can be derived based on its location. Fig.~\ref{fig:lognormalmap} shows an example of correlated lognormal shadowing map over an area of 300 meters by 300 meters.
+The 3GPP SCM was developed for cellular network simulation. However, we can adapt it to support system level simulation for mobile ad hoc networks. This adaptation has two steps. First, we need to lower the antenna height of the base stations nodes. In a TMACN edge networks, the antenna heights typically are between human height or vehicle tops. Second, instead fixing the roles among all radio nodes, i.e., base stations and mobile stations, all radio nodes in the SOIA simulator are peers.
+
+For each node in an $N$-node simulation, the SOIA simulator will generate $N-1$ sets of MIMO channel coefficients according to procedures defined in~\cite{3GPP:SCM}, representing the channels between the node and the other $N-1$ nodes. In addition, the SOIA simulator will generate a $N$ by $N$ path gain matrix between all possible transceiver pairs. The path gain between any pair of radios is the sum of the distance-based path loss and the lognormal shadowing. For the distance based path loss, similar to the 3GPP Spatial Channel Model~\cite{3GPP:SCM}, we will use the COST 231 Walfish-Ikegami NLOS and LOS models. The lognormal shadowing for the NLOS has a standard deviation of 10dB, and that for LOS is 4dB, as given in~\cite{3GPP:SCM}. Furthermore, for the same transmitter, two closely located receivers have correlated lognormal shadowing. We use a pre-generated correlated lognormal map, from which each tactical receiver's lognormal shadowing can be efficiently derived based on its location. %Fig.~\ref{fig:lognormalmap} shows an example of correlated lognormal shadowing map over an area of 300 meters by 300 meters.
+
+\subsubsection{Mobility Trace and Vignette}
+
+Due to the mobility, the channels and the path losses between any pair of nodes changes. The SOIA simulator uses a complex value (in other words, a 2-dimensional real vector) to represent the speed and the direction of a node. The L2 norm of the complex value represents the absolute value of the speed (m/s); and the direction of the complex value represents the mobility direction. For each slot, changes in the speed and its direction of each radio are generated based on the average speed and acceleration of each radio. As a result, each radio will have a new position in the 2-D plan for every TDMA slot. The new positions are then used in the physical channel model to calculate the received signal strength at each tactical radio from all potential transmitters. The pace of channel variations can thus be controlled by the speed of the mobility. For low speed mobility, new positions and old positions overlap with each other such that the channel keeps constant for longer period.
+
+The mobility traces not only can be randomly generated from the Matlab simulator, but also can be incorporated from real operation collections as well as Google Earth KML files. This feature enable us to evaluate the SOIA system performance in a realistic tactical maneuver. We plan to build a simulation vignette based on a cordon and search mission. In this tactical scenario, insurgent forces have tried to establish improvised explosive device (IED) cells and factories. The 1st Platoon of the C Company is conducting a cordon and search mission in the area to disrupt and defeat insurgent forces and provide stability and security. Three squads are position close by so they form a tactical network. Two squads are cordoning the road while the third squad searching to high value targets. The network throughput with and without SOIA technology will be compared against the mobility traces and traffic patterns distilled from this cordon and search mission.
+
+\subsubsection{Protocol Frame Structure}
+
+An important component of Task 2 is to define the SOIA protocol frame structure. The frame should include head part dedicated for clustering and coordination among cluster members. Reducing the percentage of the frame header essentially motivated us to proposed the SOIA technology as explained in Task 1. 
+
+Being able to reuse existing TMACN TDMA structures is the one of the key contributions we would like to delivery in the SOIA technology. To the purpose, we propose an innovative concept here for IA protocol frame structure. We define the SOIA frame logically instead of physically. As shown in Fig.~\ref{fig:SOIA frame}, the SOIA protocol frame has a fixed header, a variable-length header, and the rest is for IA data transmissions. The variable length header provides flexibility to accommodate different number of transceiver pairs in clusters.     
 
 \begin{figure}[h]
 \begin{center}
-\includegraphics[width=0.66\textwidth]{../figures/lognormalmap.jpg}
-\caption{\small An example of correlated lognormal shadowing map over an area of 300 meters by 300 meters. The unit for the vertical axis is dB.}
-\label{fig:lognormalmap}
+\includegraphics[width=.75\textwidth]{../figures/SOIAframe.png}
+\caption{\small Illustrations of SOIA logic protocol frame structure and mapping the logic frame to physical TMACN TDMA slots.}
+\label{fig:SOIA frame}
 \end{center}
 \end{figure}
 
-\subsubsection{Mobility Trace}
-
-Due to tactical radio mobility, the channel and the path loss between any pair of transmitters changes slot by slot.  In Phase I simulation, we assume that the platoon is patrolling in an urban area. We use a complex value (in other words, a 2-dimensional vector) to represent node speed, in which the L2 norm of the complex value represents the absolute value of the speed (m/s); and the direction of the complex value represents the mobility direction. For each slot, changes in the speed and its direction of each radio are randomly generated based on the average speed and acceleration of each radio. As a result, each radio will have a new position in the 2-D plan for every TDMA slot. The new positions are then used in the physical channel model to calculate the received signal strength at each tactical radio from all potential transmitters. 
-
-The mobility traces not only can be randomly generated from the Matlab simulator, but also can be incorporated from real operation collections as well as Google Earth KML files. This feature enable us to evaluate the SOIA system performance in a realistic tactical maneuver.
-
-%\subsubsection{System Performance Metric}
-
-%\subsection{Develop Protocol Frame Structure}\label{sec:frame_and_protocol}
-
-%To the end, at the protocol level, a training signal has to included during the transmission from $l$ to $j$, during which no other IA participa  
+Fig.~\ref{fig:SOIA frame} also depicts how we plan to map SOIA logic frames into the physical TMACN TDMA slots structures. Notably, the mapping is not continuous. A SOIA logic frame is segmented into sections and allocated with TDMA slots close in time but not necessary connected. The segments of one SOIA logic frames must be closely located in time thus the channel conditions are constant for each logic frame. On the other hand, allowing discontinuous mapping gives the TMACN TDMA resource allocation the flexibility to maintain its autonomous and fairness. We will work with our transition partner to investigate the mapping of SOIA logic frames onto tactical TDMA slot structures, e.g. soldier radio waveform.
 
 \subsection{Task 3: Plan Phase II Prototyping and Demonstration}
 
@@ -333,9 +342,9 @@ TMACN radio nodes have different antenna configurations, so we plan to use multi
 
 The commercially available choices of SDR platforms with four or more antennas are limited. One option available is Nutaq's PicoSDR 4x4 platform. In addition, we plan to investigate the cost and duration of developing and manufacturing a MIMO RF front-end for the ADAPT SDRDC platform in Fig.~\ref{fig:SDRcompare}. The SDRDC platform was developed in the DARPA ADAPT program and have been used in multiple DoD programs. Developing a MIMO RF board for ADAPT SDRDC has the potential to transit SOIA technology into a broader DoD community.
 
-Clearly, a significant portion of PHY signal processing will be executed in the FPGA. The traditional design flow to implement signal processing applications on FPGAs involves en- gineers with different expertise working in different development environments. The traditional FPGA design flow is unsuitable for fast prototyping in research and demonstration projects, which usually have limited engineering resources and tight time schedules. Those projects demand a unified environment, where one team of researchers and engineers can coherently ad- dress both algorithmic and hardware design issues. 
+Clearly, a significant portion of PHY signal processing will be executed in the FPGA. The traditional design flow to implement signal processing applications on FPGAs involves en- gineers with different expertise working in different development environments. The traditional FPGA design flow is unsuitable for fast prototyping in research and demonstration projects, which usually have limited engineering resources and tight time schedules. Those projects demand a unified environment, where one team of researchers and engineers can coherently address both algorithmic and hardware design issues. 
 
-During Phase I, we will define the fast prototyping methodology and framework for Phase II development. In particular, we plan to leverage Xilinx's System Generator for Simulink to integrate Matlab-based system modeling and FPGA development. The PI has extensive experience using this modularized design flow, which is illustrated in Fig.~\ref{fig:PaSiVe}. This methodology ensures fast, accurate, and flexible delivery of real-time wireless communication system prototypes.
+During Phase I, we will define the fast prototyping methodology and framework for Phase II development. In particular, we plan to leverage Xilinx's System Generator for Simulink to integrate Matlab-based system modeling and FPGA development. The PI has extensive experience using this modularized design flow, which is illustrated in Fig.~\ref{fig:PaSiVe}. Please also refer to related publications in the key personnel section. This methodology ensures fast, accurate, and flexible delivery of real-time wireless communication system prototypes. The signal processing algorithms are first modeled in Matlab m-code files in a modular way. Then, each modular is implemented in Simulink using System Generator's bit-true and cycle-true blocks. In Simulink, we can verify the algorithm performance in fixed-point arithmetic. The last step is to generate FPGA bitstreams to run in real SDR platforms. We can verify the design and implementation modular by modular using the same test cases. 
 
 \begin{figure}[h]
 \begin{center}
@@ -347,7 +356,7 @@ During Phase I, we will define the fast prototyping methodology and framework fo
 
 \subsection{Schedule and Reporting}
 
-Throughout the period of performance, there will be frequency informal contacts with the program manager. Bi-weekly email updates will be submitted. Monthly and Interim reports will be more detailed and show the design to date.The task schedules and planned reporting schedules are illustrated in the following table.
+Throughout the period of performance, there will be frequency informal contacts with the program manager. Bi-weekly email updates will be submitted. Monthly and Interim reports will be more detailed and show the design to date.The task schedules and planned reporting schedules are illustrated in the following.
 
 \begin{figure}[h]
 \begin{center}
@@ -362,7 +371,7 @@ Throughout the period of performance, there will be frequency informal contacts 
 
 Since the introduction, interference alignment has attracted the attention of many researchers from around the world. Numerous research papers have been published, from which we can draw insights into this technology. However, many of these papers focus on the theoretic study of interference alignment scheme and capacity gain in high SNR range, and assume that the clustering of transceiver pairs are given a prior. Applying IA into practical communication system is still an challenging issue.
 
-Several recent papers investigated the issue of applying IA in cellular network [][]. Note that reference [] is published by Professor Bhaskar Rao, who is consultant of C-3 Comm Systems on this proposal. Applying IA in cellular networks is relatively convenient since cellular systems have centralized control plane and high-speed wired network connecting base stations. Therefore, cellular systems are able to aggregate the channel knowledge of all users for optimum user clustering and computing IA solution. The same cannot be said for tactical mobile ad hoc networks. In general, TMACN doesn't have a centralized control plane. Furthermore, TMACN usually operates in low to moderate SNR range. Interference alignment has to be considered jointly with SNR enhancement. Therefore, applying IA to TMACN network is very challenging. In addition, prototyping IA schemes in tactical software defined radio platforms with MIMO capability further increase the difficulty of this SBIR topic.
+Several recent papers investigated the issue of applying IA in cellular network~\cite{6928495}\cite{6746128}. Note that reference~\cite{6928495} is published by Professor Bhaskar Rao, who is consultant of C-3 Comm Systems on this proposal. Applying IA in cellular networks is relatively convenient since cellular systems have centralized control plane and high-speed wired network connecting base stations. Therefore, cellular systems are able to aggregate the channel knowledge of all users for optimum user clustering and computing IA solution. The same cannot be said for tactical mobile ad hoc networks. In general, TMACN doesn't have a centralized control plane. Furthermore, TMACN usually operates in low to moderate SNR range. Interference alignment has to be considered jointly with SNR enhancement. Therefore, applying IA to TMACN network is very challenging. In addition, prototyping IA schemes in tactical software defined radio platforms with MIMO capability further increase the difficulty of this SBIR topic.
 
 The PI at C-3 Comm Systems brings a combined expertise on the operation of tactical networks and software defined radio system prototyping. These combined experience position C-3 Comm Systems as a strong contender to fulfill the requirements of this SBIR topic and deliver to Army a working demonstration of TMACN operating with interference alignment. Table~\ref{tab:relatedwork} lists related work the PI performed.
 
@@ -512,5 +521,6 @@ C-3 Comm Systems, LLC. has no prior, current or pending support for a similar pr
 \bibliographystyle{IEEEtran}
 \bibliography{../BibTex/ZCaoBibCollection.bib}
 
+\includepdf[pages={1}]{GDLetter.pdf}
 
 \end{document} 

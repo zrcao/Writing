@@ -29,6 +29,17 @@
 \emph{Joint Operational Access Concept (JOAC)}, Department of Defense, January
   2012.
 
+\bibitem{4567589}
+M.~Maddah-Ali, A.~Motahari, and A.~Khandani, ``Communication over mimo x
+  channels: Interference alignment, decomposition, and performance analysis,''
+  \emph{Information Theory, IEEE Transactions on}, vol.~54, no.~8, pp.
+  3457--3470, Aug 2008.
+
+\bibitem{4567443}
+V.~Cadambe and S.~Jafar, ``Interference alignment and degrees of freedom of the
+  k -user interference channel,'' \emph{Information Theory, IEEE Transactions
+  on}, vol.~54, no.~8, pp. 3425--3441, Aug 2008.
+
 \bibitem{ZandRRM:book:2001}
 J.~Zander, O.~Queseth, S.-L. Kim, and M.~Almgren, \emph{Radio Resource
   Management for Wireless Networks}, ser. Mobile Communications Series.\hskip
@@ -37,6 +48,16 @@ J.~Zander, O.~Queseth, S.-L. Kim, and M.~Almgren, \emph{Radio Resource
 \bibitem{3GPP:SCM}
 ``Spacial channel model for multiple input multiple output ({MIMO})
   simulations,'' 3GPP, Techical Report 3GPP TR 25.996 V11.0.0, September 2012.
+
+\bibitem{6928495}
+F.~Kavasoglu, Y.~Huang, and B.~Rao, ``Semi-blind interference alignment
+  techniques for small cell networks,'' \emph{Signal Processing, IEEE
+  Transactions on}, vol.~62, no.~23, pp. 6335--6348, Dec 2014.
+
+\bibitem{6746128}
+X.~Rao and V.~Lau, ``Interference alignment with partial csi feedback in mimo
+  cellular networks,'' \emph{Signal Processing, IEEE Transactions on}, vol.~62,
+  no.~8, pp. 2100--2110, April 2014.
 
 \bibitem{Internet-in-US}
 Wikipedia. (2014) Internet in the {U}nited {S}tates.
