@@ -16,7 +16,13 @@
 \definecolor{c2}{rgb}{0.82353, 0.87843, 0.92941}
 \usepackage{longtable}
 \usepackage{dsfont}
+% Save space between sections
+\usepackage[compact]{titlesec}
+\titlespacing{\section}{0pt}{*1}{*1}
+\titlespacing{\subsection}{0pt}{*1}{*1}
+\titlespacing{\subsubsection}{0pt}{*1}{*1}
 
+%\setlength{\topskip}{0pt}
 %\hoffset=-0.74in
 %\voffset= -0.8in
 %\textwidth=6.5in
@@ -44,26 +50,28 @@
 
 %\maketitle
 
-\begin{center}
-~\\
-~\\
-~\\
-{\Large{\huge\bf{Self-Organizing Interference Alignment (SOIA) for Tactical Mobile Ad Hoc Communications Network}}}\\
-~\\
-\vspace{0.1in}
-Zhongren Cao\\
-zcao@c3commsystems.com
-\end{center}
+%\begin{center}
+%~\\
+%~\\
+%~\\
+%{\Large{\huge\bf{Self-Organizing Interference Alignment (SOIA) for Tactical Mobile Ad Hoc Communications Network}}}\\
+%~\\
+%\vspace{0.1in}
+%Zhongren Cao\\
+%zcao@c3commsystems.com
+%\end{center}
+%
+%\vspace{0.1in}
+%
+%\begin{abstract}
+%Theoretical studies have shown the interference alignment has the potential to significantly improve the capacity of a wireless network. However, realizing interference alignment in practical networks requires costly coordination overhead, which may cancel out the gains obtained from interference alignment. In addition, it is a challenging task to group multiple transceiver pairs for interference alignment in a mobile ad hoc network where there is no centralized control.This proposal introduces self-organizing interference alignment (SOIA), a distributed approach for constructing clusters of transceiver pairs to perform interference alignment in a tactical mobile ad hoc communication network (TMACN). SOIA significantly reduces the coordination overhead by computing solutions locally at each individual receiver without requiring the channels of other receivers. SOIA leverages existing TMACN medium access control (MAC) scheme, thus it enables the seamless coexistence of  SOIA and non-SOIA radio nodes in the same network. The resulting SOIA product is expected to have low cost and supports a phased roll-out for speedy deployment without causing disruptions to existing equipment. In the proposed phase I and phase I option effort, we will develop the SOIA approach, comparatively evaluate its performance in simulation, and design a detailed Phase II prototyping and demonstration plan.
+%\end{abstract}
+%
+%\newpage
+%
+%\setcounter{page}{1}
 
-\vspace{0.1in}
-
-\begin{abstract}
-Theoretical studies have shown the interference alignment has the potential to significantly improve the capacity of a wireless network. However, realizing interference alignment in practical networks requires costly coordination overhead, which may cancel out the gains obtained from interference alignment. In addition, it is a challenging task to group multiple transceiver pairs for interference alignment in a mobile ad hoc network where there is no centralized control.This proposal introduces self-organizing interference alignment (SOIA), a distributed approach for constructing clusters of transceiver pairs to perform interference alignment in a tactical mobile ad hoc communication network (TMACN). SOIA significantly reduces the coordination overhead by computing solutions locally at each individual receiver without requiring the channels of other receivers. SOIA leverages existing TMACN medium access control (MAC) scheme, thus it enables the seamless coexistence of  SOIA and non-SOIA radio nodes in the same network. The resulting SOIA product is expected to have low cost and supports a phased roll-out for speedy deployment without causing disruptions to existing equipment. In the proposed phase I and phase I option effort, we will develop the SOIA approach, comparatively evaluate its performance in simulation, and design a detailed Phase II prototyping and demonstration plan.
-\end{abstract}
-
-\newpage
-
-\setcounter{page}{1}
+~~~
 
 \section{IDENTIFICATION \& SIGNIFICANCE OF THE OPPORTUNITY}
 
@@ -84,7 +92,7 @@ In order to further enhance the capacity of tactical networks, we need to develo
 
 Interference alignment (IA) is an emerging approach, which breaks away from the above fundamental doctrine, i.e., the number of simultaneous transmissions among closely located radio transceivers is limited by the number of orthogonal transmission resource units.  
 
- In interference alignment, the signaling of multiple closely located transceiver pairs are jointly designed, such that at each individual receiver all interference aligned into a subspace that is orthogonal to the desired signal. The number of interferences is more than the rank of the aligned subspace. This is explained graphically in Fig.*. ... Using interference alignment, from the network point of view, the number of simultaneous transmissions within the interference range can be more than the number of available orthogonal resource units. Thus, the overall network throughput is increased.
+ In interference alignment, the signaling of multiple closely located transceiver pairs are jointly designed, such that at each individual receiver all interference aligned into a subspace that is orthogonal to the desired signal. The number of interferences is more than the rank of the aligned subspace. Using interference alignment, from the network point of view, the number of simultaneous transmissions within the interference range can be more than the number of available orthogonal resource units. Thus, the overall network throughput is increased.
 
 At least in theory, shows it can significantly improve the network capacity. The theoretic concept of interference has been extensively explained in many academia publications. The theoretic framework for IA has several idealistic assumptions that need to be addressed before apply IA in practical systems. First, since IA jointly design the transmission signals for multiple transmitters, the channel state information (CSI) is central to calculating IA beamforming vectors. As a result, IA incurs significant overhead for CSI estimations and feedback. In mobile fast-fading environment, the overhead of CSI acquisition can limit or cancel out the gains of IA. 
 
@@ -113,16 +121,18 @@ In addition to above challenges, inserting new technology into military systems 
 %  1. Hybrid nodes (vehicle node vs. dismounted nodes) from one antenna to multiple antennas
 %  2. Hierarchical network architecture
 % It requires several steps to incorporate IA into the TMACN operations. The first step is to identify IA opportunities. 
+%\end{itemize}
+%In the following sections, the above four technical objectives are described in detail. 
+%The objectives of this proposal to develop a practical interference alignment scheme that is applicable to transmission scheme 
+% A self-organizing interference alignment scheme supporting distributed clustering
+% Built on the existing medium access control schemes widely adopted in TMACN.  
+%\begin{itemize}[noitemsep,nolistsep]
 
 \section{PHASE I TECHICAL OBJECTIVES}
 
-% A self-organizing interference alignment scheme supporting distributed clustering
-% Built on the existing medium access control schemes widely adopted in TMACN.  
-
 The overall PHASE I technical objective is to investigate, design and evaluate an interference alignment scheme, which not only can improve the capacity of TMACN, but also is practical for prototyping, demonstration and transition. Specifically, this scheme should be able to dynamically form IA transceiver clusters without a central control plane,  operate flexibly with heterogeneous radio nodes, and significantly reduce coordination feedbacks. There are four technical objectives for the Phase I effort including the Phase I option. These objectives are discussed in the following.
 
-%\begin{itemize}[noitemsep,nolistsep]
-\subsection{Research and Develop An Self-organizing Interference Alignment (SOIA)}
+\subsection{Research and Develop the Self-organizing Interference Alignment (SOIA) Technology}
 
 Interference alignment leverages the fact that interference signals, unlike noise, have inherent structures as they are generated by other radio transmitters to carry information. If multiple interfering signals at a receiver are all structured to match a subspace that is orthogonal to the subspace of the desired signal(s) of the receiver, these interfering signals are aligned without deteriorating the reception of the desired signal. IA usually finds its uses in $K$-user interference channel and X-channels. 
 
@@ -132,9 +142,9 @@ Interference alignment leverages the fact that interference signals, unlike nois
 
 {\textbf{Reducing coordination overhead for low to moderate SNR range.}} Distributed and transient clustering limits the coordination overhead that can be made available to the SOIA scheme in TMACN. Therefore, the third R\&D objective of this proposed Phase I effort is to design an SOIA scheme that extensively leverages local channel information that is naturally available to each node, thus reducing the coordination overhead. Furthermore, theoretical studies about IA usually assume high SNR range as the work point, so interference is the major impairment to the system performance. However, practical TMACN often works in low to moderate SNR ranges. Hence, the proposed SOIA scheme still needs to consider maximizing SNR to achieve expected throughput gains.
 
-\subsection{{Evaluate System Performance and Feasibility for Phase II Effort}}
+\subsection{Evaluate System Performance and Feasibility for Phase II Effort}
 
-To evaluate system performance, a performance metric has to be defined first.
+To evaluate system performance, a performance metric has to be defined first. The ideal metric should be directly related with throughput and can be measured close to the physical layer IA processing subsystem.
 
 TDMA is widely adopted in TMACN as the multiuser medium access schemes. As will be discussed in Section~\ref{ClusterHead}, the proposed SOIA scheme leverages existing TMACN TDMA MAC to lower the technology insertion barrier and reduce coordination overhead. To evaluate and quantify the system performance, we will use the average symbol throughput per slot as the metric. Usually a transmitter is assigned with multiple time slots in a series of TDMA frame for transmissions. We further divide the time slots assignment according to individual receivers and define slots used for the transmission to a single receiver as a resource unit. Note that depending on the traffic needs, the number of time slots in a resource unit varies. 
 
@@ -144,28 +154,27 @@ The first objective for system performance evaluation is to develop a Matlab bas
 
 To achieve the targeted 20\% throughput gain for Phase II demonstration, in simulation we expect that 60\%-80\% resource units shall have successful interference aligned multiple transmissions. On average, the throughput gain per resource unit with IA should be at least 50\%. Thus, the proposed SOIA system will be feasible for the Phase II effort if the overall symbol throughput gain in simulate reaches 30\% to 40\%.
 
-{\subsection{Design Protocol Frame Structure}}
+\subsubsection{Design Protocol Frame Structure}
 
 Minimum coordination among different radio nodes is still necessary to successful interference alignment. During the Phase I effort, we will design the protocol frame structure to enable such coordination.
 
-The protocol frame structure is intend to fit in the time resource unit normally assign to a single transceiver pair in existing TMACN operations without IA. The objective is to maximize the portion of the frame structure for data transmission, while ensure the exchange of necessary coordination messages among all nodes in an IA cluster. 
+The IA protocol frame structure should fit into the time resource units normally assign to a single transceiver pair in existing TMACN operations without IA. The objective is to maximize the portion of the frame structure for data transmission, while ensure the exchange of necessary coordination messages among all nodes in an IA cluster. On the other hand, the protocol frame structure is a logical concept. In slow fading environment, an IA frame can be segmented among discontinuous resource units assignment.
 
-{\subsection{Plan Phase II Prototyping and Demonstration}}
-%\end{itemize}
-%In the following sections, the above four technical objectives are described in detail. 
+A protocol frame structure is also important for system simulation. The protocol frame structure defines the run-time event boundaries for the SOIA system simulator. 
 
-%The objectives of this proposal to develop a practical interference alignment scheme that is applicable to transmission scheme 
+\subsection{Plan Phase II Prototyping and Demonstration}
 
-In  propose to design a software suite, which enables distributed interference alignment cooperations among tactical edge mobile nodes.  Since most existing military waveforms operate in slotted or TDMA mode, THE SYSTEM assumes a operational slotted network without IA as the baseline. In order to be backward compatible with existing tactical protocols,  where initial slot assignment is assumed to be performed by methods used in existing TMACN, such as SRW. Thus, each node possesses a series of time slots. The system level gain from IA comes from enabling other transceiver pairs to share time slots assigned to node ??. 
+During Phase I and Phase I option period, we will develop a detailed Phase II prototyping and demonstration plan to realize the proposed SOIA scheme using software defined radio (SDR) platforms. Successfully prototyping and demonstrating the SOIA technology is the critical stepping stone towards transition. The key objectives of this plan are the followings. 
+
+{\textbf{Identify software defined radio platforms.}} The right SDR platforms for prototyping should have enough computing resources for each radio node to perform subspace-based matrix operations in tightly controlled cycles, provide access to a broad range of spectrum bands, and enable precise transmission power control and wide-range receiver automatic gain control (AGC) for peer-to-peer mobile network communications among multiple nodes.
+
+{\textbf{Define the fast prototyping methodology.}} Due to the intensive computing needs for all IA algorithms, field programmable gate array (FPGA) based system-on-chip solutions with embedded processors are necessary to realize the proposed SOIA technology. The phase II effort include both software and firmware development. While C/C++ is the clear choice for embedded software development, our objective is to define a fast prototyping methodology with which the system modeling in Matlab can be translated into FPGA bitstreams efficiently.
+
+{\textbf{Develop the vignettes for Phase II demonstration.}} A vignette should be based on tactical maneuvers of squads in edge networks, include the mobility traces of soldiers and corresponding information traffic. The phase II plan also includes the location for and logistics of demonstrating SOIA systems in a platoon-size network of 2 to 3 squads.
 
 \section{PHASE I WORK PLAN}
 
-\subsection{Design Self-organizing Interference Alignment (SOIA) for Tactical Networks}
-
-
-
-\subsubsection{TMACN Requirements for Interference Alignment}
-
+\subsection{Task 1: Research and Develop Self-organizing Interference Alignment (SOIA) }
 
 \subsubsection{Cluster Head Pair Identification}\label{ClusterHead}
 
@@ -278,7 +287,7 @@ In other words, node $j$ selects the third pair for the IA cluster from the join
 
 The SOIA approach is designed to materialize the capacity gain of interference alignment in practical tactical network operations with realistic moderate SNR for communication links. The SOIA approach emphasizes maximizing SNR for the cluster head pair while minimizing interference power for non-head pairs in an IA cluster. In particular, SOIA solutions are computed distributedly with only local channel knowledge. Therefore, SOIA significantly reduces the coordination overhead and is practical for real world tactical network operations.
 
-\subsection{Evaluate System Performance}
+\subsection{Task 2: Evaluate System Performance and Feasibility for Phase II}
 
 During the Phase I effort, we plan to model the SOIA approach in MATLAB and develop MATLAB-based simulator to evaluate the SOIA system performance. The SOIA team recognizes that it is extremely important to have a high fidelity physical layer propagation model in order to evaluate the SOIA system performance. Many networking simulation tools, such as Qualnet and OpNet, have naïve physical layer models. The SOIA team has extensive experience in realistic MIMO channel modeling and in using Ericsson's RUNE (Rudimentary Network Emulator)~\cite{ZandRRM:book:2001}, a MATLAB-based TDMA wireless networking simulation tool available to public. We will incorporate many features of RUNE into the SOIA performance simulation.
 
@@ -304,11 +313,49 @@ The mobility traces not only can be randomly generated from the Matlab simulator
 
 %\subsubsection{System Performance Metric}
 
-\subsection{Develop Protocol Frame Structure}\label{sec:frame_and_protocol}
+%\subsection{Develop Protocol Frame Structure}\label{sec:frame_and_protocol}
 
-To the end, at the protocol level, a training signal has to included during the transmission from $l$ to $j$, during which no other IA participa  
+%To the end, at the protocol level, a training signal has to included during the transmission from $l$ to $j$, during which no other IA participa  
 
-\subsection{Plan Phase II Prototyping and Demonstration}
+\subsection{Task 3: Plan Phase II Prototyping and Demonstration}
+
+The Phase I effort on this task will identify SDR platforms for Phase II, define the prototyping methodology and develop the vignettes for Phase II demonstration.
+
+TMACN radio nodes have different antenna configurations, so we plan to use multiple SDR platforms with different antenna configurations in the Phase II prototyping test bed. Multiple reprogrammable radio platforms that are available commercially meet the requirements of Phase II prototyping. Fig.~\ref{fig:SDRcompare} lists four options of SDR platforms with two antennas. The choices of the computing device in all these platforms reflects the industry trend to replace separated CPU, DSP and FPGA chips with single chip FPGA-based embedded SoC solutions. Single chip SoC meets the size, weight and power (SWaP) requirements of real world applications. Therefore, using SDR platforms with single chip SoC can facilitate the technology transition into tactical operational platforms.
+
+\begin{figure}[h]
+\begin{center}
+\includegraphics[width=\textwidth]{../figures/SDRcomparison.png}
+\caption{\small Commercially available  SDR platforms with two-antenna configurations.}
+\label{fig:SDRcompare}
+\end{center}
+\end{figure}
+
+The commercially available choices of SDR platforms with four or more antennas are limited. One option available is Nutaq's PicoSDR 4x4 platform. In addition, we plan to investigate the cost and duration of developing and manufacturing a MIMO RF front-end for the ADAPT SDRDC platform in Fig.~\ref{fig:SDRcompare}. The SDRDC platform was developed in the DARPA ADAPT program and have been used in multiple DoD programs. Developing a MIMO RF board for ADAPT SDRDC has the potential to transit SOIA technology into a broader DoD community.
+
+Clearly, a significant portion of PHY signal processing will be executed in the FPGA. The traditional design flow to implement signal processing applications on FPGAs involves en- gineers with different expertise working in different development environments. The traditional FPGA design flow is unsuitable for fast prototyping in research and demonstration projects, which usually have limited engineering resources and tight time schedules. Those projects demand a unified environment, where one team of researchers and engineers can coherently ad- dress both algorithmic and hardware design issues. 
+
+During Phase I, we will define the fast prototyping methodology and framework for Phase II development. In particular, we plan to leverage Xilinx's System Generator for Simulink to integrate Matlab-based system modeling and FPGA development. The PI has extensive experience using this modularized design flow, which is illustrated in Fig.~\ref{fig:PaSiVe}. This methodology ensures fast, accurate, and flexible delivery of real-time wireless communication system prototypes.
+
+\begin{figure}[h]
+\begin{center}
+\includegraphics[width=0.66\textwidth]{../figures/PaSiVe.png}
+\caption{\small Simuliation, modeling and implementation using the Matlab, System Generator design flow.}
+\label{fig:PaSiVe}
+\end{center}
+\end{figure}
+
+\subsection{Schedule and Reporting}
+
+Throughout the period of performance, there will be frequency informal contacts with the program manager. Bi-weekly email updates will be submitted. Monthly and Interim reports will be more detailed and show the design to date.The task schedules and planned reporting schedules are illustrated in the following table.
+
+\begin{figure}[h]
+\begin{center}
+\includegraphics[width=0.66\textwidth]{schedule.png}
+\caption{\small Simuliation, modeling and implementation using the Matlab, System Generator design flow.}
+\label{fig:schedule}
+\end{center}
+\end{figure}
 
 
 \section{RELATED WORK}
@@ -374,13 +421,16 @@ The PI at C-3 Comm Systems brings a combined expertise on the operation of tacti
 
 \section{RELATIONSHIP WITH FUTURE RESEARCH OR RESEARCH AND DEVELOPMENT}
 
-Phase I ef
+The Phase I effort will lead to specifications of a practical interference alignment scheme support distributed clustering in a dynamic environment with minimum overhead. Successful completion of the Phase I effort (including the option) will use a high-fidelity simulation to show that the proposed SOIA approach can significantly improve the throughput of tactical mobile ad hoc network. The target is to enable interference alignment in about 60\%-80\% resource units with on the average more than 50\% throughput gain per transient cluster. Thus, the proposed SOIA system will be feasible for the Phase II effort if the overall symbol throughput gain in simulate reaches 30\% to 40\%. Phase I effort will also lead to a detailed prototyping and demonstration plan serving as the road map for Phase II activities.
+
+Furthermore, C-3 Comm Systems is a new company focusing on developing disruptive wireless technologies for both the government and consumer markets. The success of Phase I effort will enhance our patentable technology portfolio and facilitate product development and technology transition.
+
 
 \section{COMMERCIALIZATION STRATEGY}
 
 C-3 Comm Systems plans to commercialize the SOIA technology in both the DoD market and consumer market.
 
-For the DoD market, C-3 Comm Systems plans to work with General Dynamics Mission Systems (GD-MS) to insert the SOIA technology into tactical radio systems. GD-MS  delivers tactical C4ISR systems to the DoD, leveraging technologies that provide decisive advantages to the warfighter. GD-MS is a prime contractor for Handheld, Manpack, and Small Form Factor (HMS), Command Post of the Future (CPOF), Warfighter Information Network-Tactical (WIN-T), Electronic Warfare, Security programs and many others supporting the Global Information Grid. The current and future evolution of the HMS AN/PRC-154 Rifleman Radio is the main targeted platform for the commercialization of SOIA technology. C-3 Comm Systems plans to involve GD-MS as an active partner during the Phase II effort to ensure a smooth transition in the future.
+For the DoD market, C-3 Comm Systems plans to work with General Dynamics Mission Systems (GD-MS) to insert the SOIA technology into tactical radio systems. GD-MS  delivers tactical C4ISR systems to the DoD, leveraging technologies that provide decisive advantages to the warfighter. GD-MS is a prime contractor for Handheld, Manpack, and Small Form Factor (HMS), Command Post of the Future (CPOF), Warfighter Information Network-Tactical (WIN-T), Electronic Warfare, Security programs and many others supporting the Global Information Grid. The current and future evolution of the HMS AN/PRC-154 Rifleman Radio is the main targeted platform for the commercialization of SOIA technology. C-3 Comm Systems plans to involve GD-MS as an active partner during the Phase II effort to ensure a smooth transition in the future. Please see the attached support letter from GD-MS on the last page of this proposal's technical volume.
 
 For the consumer market, C-3 Comm Systems is monitoring the wireless Internet access for homes. In 2012, 81\% of Americans were using the Internet, which ranks the U.S. 28th out of 211 countries in the world~\cite{Internet-in-US}. A large number of people in the US have little or no choice at all on who provides their internet access. The country suffers from a severe lack of competition in the broadband business. Nearly one-third of households in the United States have either no choice for home broadband Internet service, or no options at all. Google has been leading the effort to install fiber to homes in various cities in US. However, the cost to wire every home with fibers are prohibitively expensive even for Google. In fact, Google bought Alpental Technologies, a startup company focus on wireless Internet access. The SOIA technology, if successful, can enable multiple homes to have simultaneous transmissions with multiple fiber heads along the street, which can significantly enhance the throughput by individual home users. C-3 Comm Systems plans to demonstrate the SOIA technology in this context to Google and other potential transition partners in the late stage of Phase II effort.
 
