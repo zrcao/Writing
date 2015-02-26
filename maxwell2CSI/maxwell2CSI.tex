@@ -1,0 +1,115 @@
+\documentclass[letterpaper,11pt]{article}
+%\usepackage[textwidth=6.5in,textheight=8.5in]{geometry}
+\usepackage[margin=1.0in]{geometry}
+\setlength{\headheight}{28pt}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{array}
+\usepackage{amsmath}
+%document font (Times)
+\usepackage{tgtermes}
+\usepackage[T1]{fontenc}
+%\usepackage{mathptmx}
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage[usenames,dvipsnames,svgnames,table]{xcolor}
+\usepackage{colortbl,hhline}
+\definecolor{c1}{rgb}{0.30980, 0.50588, 0.73725}
+\definecolor{c2}{rgb}{0.82353, 0.87843, 0.92941}
+\usepackage{longtable}
+\usepackage{dsfont}
+% Save space between sections
+\usepackage[compact]{titlesec}
+\titlespacing{\section}{0pt}{*1}{*1}
+\titlespacing{\subsection}{0pt}{*1}{*1}
+\titlespacing{\subsubsection}{0pt}{*1}{*1}
+% For including PDF pages
+\usepackage{pdfpages}
+
+%\setlength{\topskip}{20pt}
+%\hoffset=-0.74in
+%\voffset= -0.8in
+%\textwidth=6.5in
+%\textheight=8.5in
+%\marginparwidth=0pt
+
+%\fancyhead{}
+%\fancyfoot{}
+%\pagenumbering{Roman}
+%\lhead{\includegraphics[width=0.25\textwidth]{../figures/C-3logo.png}}
+%\chead{Proposal Number\\A151-020-0273}
+%\rhead{Topic Number\\A15-020}
+%\cfoot{\textcopyright~C-3 Comm Systems LLC. Proprietary.}
+%\rfoot{\thepage}
+
+\pagestyle{fancy}
+
+\title{\bf{From Maxwell To Channel State Information}}
+\author{Zhongren Cao, Ph.D.}
+
+\let\bs\boldsymbol
+
+\begin{document}
+
+\thispagestyle{fancy}
+
+\maketitle
+
+\section{The Derivation of Wireless Channel Representation}
+
+Let $x(t)$ denote the transmitted signals and $y(t)$ denote the received signals. 
+
+\subsection{Free Space Line of Sight (LOS)}
+
+First, let's consider a fixed antenna radiating a single sinusoid signal, $x(t)=cos2\pi ft$, into the free space. Since the electric field and magnetic field are proportional to each other, it is sufficient to know only one of them. Assuming that the location of the transmitting antenna is at the original point. For a far-field point $\bf{u}=(\theta, \psi, r)$ in the space, we have the electric field value as
+\begin{equation}
+E(f,t,{\bf{u}})=\frac{\alpha_s(\theta, \psi, f)\cos2\pi f(t-r/c)}{r}.
+\end{equation}
+Here, $r$ is the distance between the point $\bf{u}$ and the transmit antenna, $c$ is the speed of light, and $\alpha_s(\theta, \psi, f)$ is the radiation pattern of the transmit antenna at frequency $f$ and the direction $(\theta, \psi)$.
+
+Next, let's assume we have a receive antenna at point $\bf{u}$, the signal received by the antenna can be represented as
+\begin{equation}\label{rxsignal}
+y(t)=\frac{\alpha(\theta,\psi,f)\cos2\pi f(t-r/c)}{r}.
+\end{equation}
+where $\alpha(\theta,\psi,f)=\alpha_s(\theta, \psi, f)\alpha_r(\tilde{\theta}, \tilde{\psi}, f)$ the product of the transmit antenna pattern and the receive antenna pattern at frequency $f$. The direction $\tilde{\theta}, \tilde{\psi}$ is the incoming direction of the signal from the receive antenna point of view. \\
+
+\fbox{\parbox{0.9\textwidth}{{\textbf{Assumption I}}: Placing a receive antenna at point $\bf{u}$ inevitably changes the electric field in the vicinity of $\bf{u}$. Here, we made an assumption that the change of the electric field at point $\bf{u}$ is taken into account by the pattern of the receive antenna at $\bf{u}$.}}
+
+~\\
+
+Let $a=\alpha(\theta, \psi, f)/r$ and $\hat{\tau}=r/c$. $a$ is the signal attenuation and $\hat{\tau}$ is the delay. The received signal in Eq.~(\ref{rxsignal}) can be re-written as
+\begin{equation}\label{rxsignal_tau}
+y(t)=a\cos2\pi f(t-\hat{\tau}).
+\end{equation}
+Notice that $a$ is a function of frequency $f$.
+
+\subsection{Received Sinusoid in Scattering and Mobile Environment}
+
+In an scattering environment, there may or may not be a LOS path from the transmitter to the receiver. The received signal is the sum of multiple reflected rays from scattering objects in the surround environment and, if it exists, the LOS ray. Let's focus on the $i$th ray here, which is a non-LOS (NLOS) ray. Due to the mobility, both the attenuation and the delay are functions of time $t$. Based on Eq.~(\ref{rxsignal_tau}), the receive signal from the $i$th ray is
+\begin{equation}\label{rxsignal_oneray}
+\displaystyle y_i(t)=a_i(f,t)\cos\big(2\pi f[t-\hat{\tau}_i(t)]-\phi_i\big),
+\end{equation}
+where $\phi_i$ accounts for the overall phase change at the transmitter, reflectors and the receiver. Let
+$$
+\tau_i(f, t)=\hat{\tau_i(t)}+\frac{\phi_i}{2\pi f},
+$$ 
+we can represent Eq.~(\ref{rxsignal_oneray}) in a similar format as Eq.~(\ref{rxsignal_tau}) in the following.
+\begin{equation}
+y_i(t)=a_i(f,t)\cos2\pi f\big(t-\tau_i(f, t)\big).
+\end{equation}
+Note that $\tau_i$ is a function of both frequency $f$ and time $t$.
+
+\subsection{Band-limited Signals}
+
+In the previous section, we focused on a single sinusoid input. The communication signal $x(t)$ always occupies a limited bandwidth $W=f_H-f_L$. The real signal x(t) from the transmit antenna is 
+\begin{equation}
+\displaystyle x(t)=\int_{f_L}^{f_H}X(f)e^{j2\pi ft}df.
+\end{equation}
+
+
+\section{Channel State Information Generation from SciX3 Software}
+
+\bibliographystyle{IEEEtran}
+\bibliography{../BibTex/ZCaoBibCollection.bib}
+
+\end{document} 
