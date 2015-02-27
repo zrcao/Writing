@@ -25,6 +25,7 @@
 \titlespacing{\subsubsection}{0pt}{*1}{*1}
 % For including PDF pages
 \usepackage{pdfpages}
+\usepackage{yfonts}
 
 %\setlength{\topskip}{20pt}
 %\hoffset=-0.74in
@@ -36,11 +37,15 @@
 %\fancyhead{}
 %\fancyfoot{}
 %\pagenumbering{Roman}
+\lhead{}
 %\lhead{\includegraphics[width=0.25\textwidth]{../figures/C-3logo.png}}
+\chead{}
 %\chead{Proposal Number\\A151-020-0273}
+\rhead{}
 %\rhead{Topic Number\\A15-020}
 %\cfoot{\textcopyright~C-3 Comm Systems LLC. Proprietary.}
-%\rfoot{\thepage}
+\cfoot{}
+\rfoot{\thepage}
 
 \pagestyle{fancy}
 
@@ -79,9 +84,12 @@ where $\alpha(\theta,\psi,f)=\alpha_s(\theta, \psi, f)\alpha_r(\tilde{\theta}, \
 
 Let $a=\alpha(\theta, \psi, f)/r$ and $\hat{\tau}=r/c$. $a$ is the signal attenuation and $\hat{\tau}$ is the delay. The received signal in Eq.~(\ref{rxsignal}) can be re-written as
 \begin{equation}\label{rxsignal_tau}
-y(t)=a\cos2\pi f(t-\hat{\tau}).
+y(t)=a\cos2\pi f(t-\hat{\tau})=ax(t-\hat{\tau}).
 \end{equation}
-Notice that $a$ is a function of frequency $f$.
+Let's treat $x(t)$ as the system input and $y(t)$ as the system output. Eq.~(\ref{rxsignal_tau}) indicates that the system response at the receive antenna is linear. This is a crucial conclusion for wireless channel modeling. \\
+
+\fbox{\parbox{0.95\textwidth}{{\textbf{Conclusion I}}: Wireless channel is a linear system. Therefore, the received field at $\bf{u}$ in responses to a weighted sum of transmitted waveform is the weighted sum of responses to individual waveforms.}}
+
 
 \subsection{Received Sinusoid in Scattering and Mobile Environment}
 
@@ -97,15 +105,67 @@ we can represent Eq.~(\ref{rxsignal_oneray}) in a similar format as Eq.~(\ref{rx
 \begin{equation}
 y_i(t)=a_i(f,t)\cos2\pi f\big(t-\tau_i(f, t)\big).
 \end{equation}
-Note that $\tau_i$ is a function of both frequency $f$ and time $t$.
+Note that $\tau_i$ is a function of both frequency $f$ and time $t$. It can be view as the effective propagation delay of the $i$th ray.
+
+The received signal is the sum of all rays, i.e.,
+\begin{equation}
+y(t)=\displaystyle\sum_i a_i(f,t)\cos2\pi f\big(t-\tau_i(f, t)\big).
+\end{equation}
+
+
+%Let $h_i(\tau;t)=a_i(f,t)\sigma\big(t-\tau_i(f,t)\big)$
 
 \subsection{Band-limited Signals}
 
-In the previous section, we focused on a single sinusoid input. The communication signal $x(t)$ always occupies a limited bandwidth $W=f_H-f_L$. The real signal x(t) from the transmit antenna is 
+In the previous section, we focused on a single sinusoid input. The communication signal $x(t)$ always occupies a limited bandwidth $W=f_H-f_L$. The center carrier frequency is $f_c=(f_L+f_H)/2$. The signal x(t) sent from the transmit antenna can be represented by 
 \begin{equation}
-\displaystyle x(t)=\int_{f_L}^{f_H}X(f)e^{j2\pi ft}df.
+\displaystyle x(t)=\int_{f_L}^{f_H}X(f)e^{j2\pi ft}df+\int_{-f_H}^{-f_L}X(f)e^{j2\pi ft}df,
+\end{equation}
+where $X(f)$ is the Fourier Transform of $x(t)$. Since $x(t)$ is a real signal, $X(f)$ satisfies $X(f)=X^{*}(-f)$. Therefore, we have
+\begin{equation}
+\begin{array}{rl}
+\displaystyle x(t)&=\displaystyle \int_{f_L}^{f_H}\left(X(f)e^{j2\pi ft}+X^{*}(f)e^{-j2\pi ft}\right)df\\
+\displaystyle &=\displaystyle 2\int_{f_L}^{f_H}{\textfrak{Re}}\left[X(f)e^{j2\pi ft}\right]df\\
+&=\displaystyle 2\int_{f_L}^{f_H}\bigg({\textfrak{Re}}\left[X(f)\right]\cos2\pi ft-{\textfrak{Im}}\left[X(f)\right]\sin2\pi ft\bigg)df\\
+\end{array}
+\end{equation}
+Therefore, $x(t)$ is continuous integration of sinusoids between frequency $[f_L, f_H]$. According to \textbf{Conclusion I} above, the receive signal $y(t)$ in response to an arbitrary band limited signal $x(t)$ is 
+\begin{equation}\label{frq_dependent}
+y(t)=\displaystyle\sum_i a_i(f,t)x\big(t-\tau_i(f, t)\big).
 \end{equation}
 
+The attenuations $a_i(f,t)$ and the effective propagation delay $\tau_i(f,t)$ are slow varying along the frequency axis. Let's assume  that the bandwidth of signal is much smaller than the center carrier frequency, i.e. $W\ll f_C$. In other words, signal $x(t)$ is a narrow band signal. Now, we are going to the second important assumption. \\
+
+\fbox{\parbox{0.9\textwidth}{{\textbf{Assumption II}}: For narrow band signals, at any given time instance $t$, the attenuators $a_i(f,t)$ and the effective propagation delay $\tau_i(f,t)$ are constant over the signal bandwidth $W$.}}
+
+~~\\
+
+Based on {\textbf{Assumption II}}, the model in Eq.~(\ref{frq_dependent}) is simplified to
+\begin{equation}\label{frq_independent}
+y(t)=\displaystyle\sum_i a_i(t)x\big(t-\tau_i(t)\big).
+\end{equation}
+The wireless channel is defined as
+\begin{equation}\label{passbandChannelDef}
+\boxed{h(\tau;t)=\displaystyle\sum_ia_i(t)\delta\bigg(\tau-\tau_i(t)\bigg),}
+\end{equation}
+where $\delta(\tau)$ is the Dirac delta function on the $\tau$ axis. Using the wireless channel definition in Eq.~{(\ref{passbandChannelDef}}), Eq.~(\ref{frq_independent}) can be expressed as linear system response between input $x(t)$ and output $y(t)$ as
+\begin{equation}
+y(t)=\displaystyle\int_{-\infty}^{\infty}h(\tau;t)x(t-\tau)d\tau.
+\end{equation}
+The above two equations are very neat representations. It says that the effect of mobile users, arbitrarily moving reflectors and absorbers, and all the complexities of solving Maxwell's equations, finally reduce to an input/output relation represented as the impulse response of a linear time-varying filter. This is the essence of wireless channel.
+
+The Doppler shift is not immediately evident in the representation of Eq.~(\ref{passbandChannelDef}). In fact, for the $i$th path, the effective delay is a function of time $t$. Its derivative against $t$ is $\tau_i'(t)$, and the Doppler shift on the $i$th path for frequency $f$ is $-f\tau'_i(t)$. 
+
+For the special case when the environment is static so the attenuators $a_i(t)$ and the effective propagation delay $\tau_i(t)$ do not vary over time, we have the linear time-invariant channel model with the impulse response representation as
+\begin{equation}
+h(\tau)=\displaystyle\sum_ia_i\delta(\tau-\tau_i).
+\end{equation}
+
+
+
+\subsection{Baseband Equivalent Channel Model}
+
+\subsection{Discrete-time Baseband Channel Model}
 
 \section{Channel State Information Generation from SciX3 Software}
 
