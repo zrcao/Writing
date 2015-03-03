@@ -131,7 +131,8 @@ where $X(f)$ is the Fourier Transform of $x(t)$. Since $x(t)$ is a real signal, 
 \end{equation}
 Therefore, $x(t)$ is continuous integration of sinusoids between frequency $[f_L, f_H]$. According to \textbf{Conclusion I} above, the receive signal $y(t)$ in response to an arbitrary band limited signal $x(t)$ is 
 \begin{equation}\label{frq_dependent}
-y(t)=\displaystyle\sum_i a_i(f,t)x\big(t-\tau_i(f, t)\big).
+%y(t)=\displaystyle\sum_i a_i(f,t)x\big(t-\tau_i(f, t)\big).
+y(t)=\displaystyle2\int_{f_L}^{f_H}\sum_ia_i(f,t)\bigg({\textfrak{Re}}\left[X(f)\right]\cos2\pi f\big(t-\tau_i(f,t)\big)-{\textfrak{Im}}\left[X(f)\right]\sin2\pi f\big(t-\tau_i(f,t)\big)\bigg)df
 \end{equation}
 
 The attenuations $a_i(f,t)$ and the effective propagation delay $\tau_i(f,t)$ are slow varying along the frequency axis. Let's assume  that the bandwidth of signal is much smaller than the center carrier frequency, i.e. $W\ll f_C$. In other words, signal $x(t)$ is a narrow band signal. Now, we are going to the second important assumption. \\
@@ -142,7 +143,10 @@ The attenuations $a_i(f,t)$ and the effective propagation delay $\tau_i(f,t)$ ar
 
 Based on {\textbf{Assumption II}}, the model in Eq.~(\ref{frq_dependent}) is simplified to
 \begin{equation}\label{frq_independent}
-y(t)=\displaystyle\sum_i a_i(t)x\big(t-\tau_i(t)\big).
+\begin{array}{rl}
+y(t)&=\displaystyle2\sum_ia_i(t)\int_{f_L}^{f_H}\bigg({\textfrak{Re}}\left[X(f)\right]\cos2\pi f\big(t-\tau_i(t)\big)-{\textfrak{Im}}\left[X(f)\right]\sin2\pi f\big(t-\tau_i(t)\big)\bigg)df\\
+&=\displaystyle\sum_i a_i(t)x\big(t-\tau_i(t)\big).\\
+\end{array}
 \end{equation}
 The wireless channel is defined as
 \begin{equation}\label{passbandChannelDef}
